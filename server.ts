@@ -39,8 +39,12 @@ app.prepare().then(async () => {
 
   // Initialize Spectator WebSocket server (dynamic import for ESM compatibility)
   try {
-    const { initWebSocketServer, getWSStats } = await import('./src/lib/websocket');
-    wss = initWebSocketServer(server);
+    const { WebSocketServer } = await import('ws');
+    const { initWebSocketServerFromWSS, getWSStats } = await import('./src/lib/websocket');
+
+    // Create spectator WebSocket server with noServer mode
+    wss = new WebSocketServer({ noServer: true });
+    initWebSocketServerFromWSS(wss);
 
     // Update stats periodically
     setInterval(() => {
@@ -64,25 +68,6 @@ app.prepare().then(async () => {
     // Create separate WebSocket server for agent connections
     agentWss = new WebSocketServer({ noServer: true });
 
-    // Handle upgrade requests for agent WebSocket path
-    server.on('upgrade', (request, socket, head) => {
-      const parsedUrl = parse(request.url!, true);
-      const pathname = parsedUrl.pathname;
-
-      // Check if this is an agent WebSocket connection
-      if (pathname?.startsWith('/ws/agent/')) {
-        // Extract agent ID from path (optional, for logging)
-        const agentIdMatch = pathname.match(/\/ws\/agent\/(\d+)/);
-        const agentId = agentIdMatch ? agentIdMatch[1] : 'unknown';
-
-        console.log(`[Server] Agent WebSocket upgrade request for agent ${agentId}`);
-
-        agentWss!.handleUpgrade(request, socket, head, (ws) => {
-          agentWss!.emit('connection', ws, request);
-        });
-      }
-    });
-
     // Handle agent WebSocket connections
     agentWss.on('connection', (ws: WebSocket, req) => {
       console.log('[Server] New agent WebSocket connection');
@@ -99,6 +84,45 @@ app.prepare().then(async () => {
   } catch (err) {
     console.warn('[Server] Agent WebSocket not available:', err instanceof Error ? err.message : 'Unknown error');
   }
+
+  // Handle ALL upgrade requests in a single handler
+  server.on('upgrade', (request, socket, head) => {
+    const parsedUrl = parse(request.url!, true);
+    const pathname = parsedUrl.pathname;
+
+    if (pathname?.startsWith('/ws/agent/')) {
+      // Agent WebSocket path
+      const agentIdMatch = pathname.match(/\/ws\/agent\/(\d+)/);
+      const agentId = agentIdMatch ? agentIdMatch[1] : 'unknown';
+
+      console.log(`[Server] Agent WebSocket upgrade request for agent ${agentId}`);
+
+      if (agentWss) {
+        const currentAgentWss = agentWss;
+        currentAgentWss.handleUpgrade(request, socket, head, (ws) => {
+          currentAgentWss.emit('connection', ws, request);
+        });
+      } else {
+        socket.destroy();
+      }
+    } else if (pathname === '/ws') {
+      // Spectator WebSocket path
+      console.log('[Server] Spectator WebSocket upgrade request');
+
+      if (wss) {
+        const currentWss = wss;
+        currentWss.handleUpgrade(request, socket, head, (ws) => {
+          currentWss.emit('connection', ws, request);
+        });
+      } else {
+        socket.destroy();
+      }
+    } else {
+      // Unknown WebSocket path - reject
+      console.log(`[Server] Unknown WebSocket path: ${pathname}`);
+      socket.destroy();
+    }
+  });
 
   server.listen(port, () => {
     console.log(`

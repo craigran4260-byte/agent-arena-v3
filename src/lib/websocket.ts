@@ -27,7 +27,68 @@ const clients: Map<WebSocket, ClientConnection> = new Map();
 let wss: WebSocketServer | null = null;
 
 /**
+ * Initialize WebSocket server from an external WebSocketServer instance
+ * Used when the server.ts creates the WSS with noServer mode
+ */
+export function initWebSocketServerFromWSS(wssInstance: WebSocketServer): void {
+  wss = wssInstance;
+
+  wss.on('connection', (ws, req) => {
+    console.log('[WS] New client connected');
+
+    // Initialize client connection
+    const client: ClientConnection = {
+      ws,
+      subscribedTables: new Set(),
+    };
+    clients.set(ws, client);
+
+    // Send welcome message
+    sendMessage(ws, {
+      type: 'table_update',
+      data: { message: 'Connected to Agent Arena WebSocket' },
+    });
+
+    ws.on('message', (data: Buffer) => {
+      try {
+        const message: WSMessage = JSON.parse(data.toString());
+        handleMessage(ws, message);
+      } catch (err) {
+        console.error('[WS] Invalid message format:', err);
+        sendMessage(ws, { type: 'error', data: { error: 'Invalid message format' } });
+      }
+    });
+
+    ws.on('close', () => {
+      console.log('[WS] Client disconnected');
+      cleanupClient(ws);
+    });
+
+    ws.on('error', (err) => {
+      console.error('[WS] Client error:', err);
+      cleanupClient(ws);
+    });
+  });
+
+  // Subscribe to Redis channels for table updates
+  redisSubscriber.subscribe('table_updates', 'game_events');
+  redisSubscriber.on('message', (channel, message) => {
+    if (channel === 'table_updates' || channel === 'game_events') {
+      try {
+        const data = JSON.parse(message);
+        broadcastTableUpdate(data.tableId, data);
+      } catch (err) {
+        console.error('[WS] Failed to parse Redis message:', err);
+      }
+    }
+  });
+
+  console.log('[WS] WebSocket server initialized on /ws');
+}
+
+/**
  * Initialize WebSocket server on a given HTTP server
+ * @deprecated Use initWebSocketServerFromWSS with noServer mode in server.ts
  */
 export function initWebSocketServer(server: http.Server): WebSocketServer {
   wss = new WebSocketServer({ server, path: '/ws' });
