@@ -1,162 +1,321 @@
+/* Arcade SDK/Framework Section Styles */
+
 .section {
   max-width: 1200px;
   margin: 0 auto;
-  padding: var(--space-8) var(--space-6);
+  padding: var(--space-12) var(--space-6);
   text-align: center;
+  background: var(--bg-purple);
 }
 
 .title {
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  font-weight: var(--font-weight-bold);
-  color: var(--text-primary);
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-lg);
+  color: var(--neon-cyan);
+  text-shadow: var(--shadow-neon-cyan);
   margin: 0 0 var(--space-2) 0;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-pixel);
 }
 
 .subtitle {
+  font-family: var(--font-mono);
   font-size: var(--font-size-base);
   color: var(--text-secondary);
-  margin: 0 0 var(--space-6) 0;
+  margin: 0 0 var(--space-8) 0;
 }
 
-.sdkCards {
+/* Framework cards grid */
+.frameworkGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--space-4);
+  margin-bottom: var(--space-8);
 }
 
-.sdkCard {
+.frameworkCard {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
   text-align: left;
+  border: 4px solid var(--border-neon);
+  position: relative;
 }
 
-.sdkCard h3 {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
-  color: var(--text-primary);
+/* Scanline effect */
+.frameworkCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+  pointer-events: none;
+}
+
+/* Popular/recommended card */
+.frameworkCard.popular {
+  border-color: var(--neon-lime);
+  box-shadow: var(--shadow-neon-lime);
+}
+
+.cardHeader {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.frameworkName {
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-base);
+  color: var(--neon-magenta);
+  text-shadow: 0 0 4px var(--neon-magenta);
   margin: 0;
+  text-transform: uppercase;
 }
 
-.sdkCard p {
-  font-size: var(--font-size-sm);
+.frameworkDesc {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
   color: var(--text-secondary);
   margin: 0;
+  line-height: var(--line-height-pixel);
 }
 
-.codeBox {
+/* Protocol info */
+.protocolInfo {
   display: flex;
   flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-2);
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid var(--border-pixel);
+}
+
+.protocolLabel {
+  display: flex;
   gap: var(--space-2);
+}
+
+.labelText {
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.protocolValue {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--neon-cyan);
+}
+
+/* Steps section */
+.stepsSection {
+  margin-top: var(--space-2);
+}
+
+.stepsTitle {
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  color: var(--neon-lime);
+  text-transform: uppercase;
+  margin-bottom: var(--space-2);
+}
+
+.stepsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.stepItem {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+}
+
+.stepNumber {
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  color: var(--bg-deep);
+  background: var(--neon-lime);
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stepText {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+/* Code section */
+.codeSection {
+  margin-top: var(--space-2);
 }
 
 .codeLabel {
-  font-size: var(--font-size-xs);
+  font-family: var(--font-pixel);
+  font-size: 10px;
   color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: var(--space-2);
 }
 
-.codeRow {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
+.codeBlock {
+  position: relative;
+  background: var(--bg-dark);
+  border: 2px solid var(--border-pixel);
+  overflow: hidden;
+}
+
+.codeContent {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--neon-lime);
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0;
   padding: var(--space-3);
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-default);
-}
-
-.codeRow code {
-  flex: 1;
-  font-family: 'Monaco', 'Consolas', monospace;
-  font-size: var(--font-size-sm);
-  color: var(--gold-primary);
-  word-break: break-all;
+  overflow-x: auto;
+  line-height: 1.5;
 }
 
 .copyBtn {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
   padding: var(--space-1) var(--space-2);
-  background-color: transparent;
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-sm);
-  color: var(--text-secondary);
+  background: transparent;
+  border: 2px solid var(--neon-cyan);
+  color: var(--neon-cyan);
   cursor: pointer;
-  transition: all var(--transition-base);
+  transition: all var(--transition-fast);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .copyBtn:hover {
-  background-color: var(--gold-primary);
-  color: var(--bg-primary);
-  border-color: var(--gold-primary);
+  background: var(--neon-cyan);
+  color: var(--bg-deep);
 }
 
-.sdkButtons {
-  display: flex;
-  gap: var(--space-2);
-  margin-top: var(--space-2);
-}
-
-.cliNote {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-2);
-  background-color: rgba(255, 215, 0, 0.1);
-  border-radius: var(--radius-sm);
-  font-size: var(--font-size-xs);
-  color: var(--gold-primary);
-  margin-top: var(--space-2);
-}
-
-.cliNote svg {
-  color: var(--gold-primary);
-}
-
-.quickStart {
-  margin-top: var(--space-6);
+/* Protocol Reference Section */
+.protocolRef {
   padding: var(--space-6);
-  background-color: var(--bg-elevated);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-lg);
+  background: var(--bg-dark);
+  border: 4px solid var(--neon-magenta);
+  position: relative;
 }
 
-.quickStart h3 {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
-  color: var(--text-primary);
-  margin: 0 0 var(--space-3) 0;
+/* Scanline effect */
+.protocolRef::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.1) 2px,
+    rgba(0, 0, 0, 0.1) 4px
+  );
+  pointer-events: none;
 }
 
-.codeExample {
-  font-family: 'Monaco', 'Consolas', monospace;
+.refTitle {
+  font-family: var(--font-pixel);
   font-size: var(--font-size-sm);
+  color: var(--neon-magenta);
+  text-shadow: 0 0 4px var(--neon-magenta);
+  margin: 0 0 var(--space-4) 0;
+  text-transform: uppercase;
+}
+
+.refGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+}
+
+.refColumn {
+  text-align: left;
+}
+
+.refHeader {
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  color: var(--neon-cyan);
+  text-transform: uppercase;
+  margin-bottom: var(--space-3);
+  padding-bottom: var(--space-2);
+  border-bottom: 2px solid var(--border-pixel);
+}
+
+.refMessages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.refMsg {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-2);
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid var(--border-pixel);
+}
+
+.msgType {
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  color: var(--neon-lime);
+  text-transform: uppercase;
+}
+
+.refMsg code {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
   color: var(--text-secondary);
   white-space: pre-wrap;
-  word-break: break-word;
-  margin: 0 0 var(--space-4) 0;
-  padding: var(--space-4);
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: var(--radius-md);
-  text-align: left;
-  overflow-x: auto;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .frameworkGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
   .section {
-    padding: var(--space-6) var(--space-4);
+    padding: var(--space-8) var(--space-4);
   }
 
-  .sdkCards {
+  .frameworkGrid {
     grid-template-columns: 1fr;
   }
 
-  .sdkButtons {
-    flex-direction: column;
+  .refGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
   }
 
-  .quickStart {
-    padding: var(--space-4);
+  .title {
+    font-size: var(--font-size-base);
   }
 }
