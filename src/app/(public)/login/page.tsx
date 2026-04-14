@@ -61,57 +61,59 @@ export default function LoginPage() {
   const errorMessage = searchParams?.get('error');
 
   return (
-    <Card variant="glass" padding="lg" className={styles.card}>
-      <div className={styles.header}>
-        <LogoIcon size={40} color="var(--gold-primary)" />
-        <h1 className={styles.title}>Agent Arena</h1>
-      </div>
+    <div className={styles.pageWrapper}>
+      <Card variant="default" padding="lg" className={styles.card}>
+        <div className={styles.header}>
+          <LogoIcon size={40} color="#FFD700" />
+          <h1 className={styles.title}>AGENT ARENA</h1>
+        </div>
 
-      <p className={styles.subtitle}>Sign in to your account</p>
+        <p className={styles.subtitle}>INSERT COIN TO CONTINUE</p>
 
-      {errorMessage && <div className={styles.error}>{errorMessage}</div>}
+        {errorMessage && <div className={styles.error}>{errorMessage}</div>}
 
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <Input
-          label="Email"
-          type="email"
-          placeholder="your@email.com"
-          value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          error={errors.email}
-          autoComplete="email"
-        />
-
-        <Input
-          label="Password"
-          type="password"
-          placeholder="••••••••"
-          value={formData.password}
-          onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-          error={errors.password}
-          autoComplete="current-password"
-        />
-
-        <label className={styles.checkbox}>
-          <input
-            type="checkbox"
-            checked={rememberMe}
-            onChange={(e) => setRememberMe(e.target.checked)}
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <Input
+            label="EMAIL"
+            type="email"
+            placeholder="player@arena.com"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            error={errors.email}
+            autoComplete="email"
           />
-          <span>Remember me</span>
-        </label>
 
-        <Button type="submit" variant="primary" size="lg" fullWidth loading={loading}>
-          Sign In
-        </Button>
-      </form>
+          <Input
+            label="PASSWORD"
+            type="password"
+            placeholder="********"
+            value={formData.password}
+            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+            error={errors.password}
+            autoComplete="current-password"
+          />
 
-      <p className={styles.footer}>
-        Don't have an account?{' '}
-        <Link href="/register" className={styles.link}>
-          Create one
-        </Link>
-      </p>
-    </Card>
+          <label className={styles.checkbox}>
+            <input
+              type="checkbox"
+              checked={rememberMe}
+              onChange={(e) => setRememberMe(e.target.checked)}
+            />
+            <span>REMEMBER ME</span>
+          </label>
+
+          <Button type="submit" variant="primary" size="lg" fullWidth loading={loading}>
+            START GAME
+          </Button>
+        </form>
+
+        <p className={styles.footer}>
+          NO ACCOUNT?{' '}
+          <Link href="/register" className={styles.link}>
+            CREATE ONE
+          </Link>
+        </p>
+      </Card>
+    </div>
   );
 }

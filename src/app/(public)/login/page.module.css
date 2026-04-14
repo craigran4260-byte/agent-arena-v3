@@ -1,10 +1,42 @@
+/* Login Page - Arcade Style (Black/Red/Yellow/White) */
+
+.pageWrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  background: #000;
+}
+
+/* Card - solid black, no blur */
 .card {
   width: 100%;
   max-width: 420px;
-  border: 1px solid var(--border-gold);
-  background: rgba(26, 26, 26, 0.8);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 32px rgba(255, 215, 0, 0.1);
+  border: 4px solid #FFD700;  /* Yellow border */
+  background: #000;  /* Solid black */
+  position: relative;
+}
+
+/* Pixel corner decorations */
+.card::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 16px;
+  height: 16px;
+  background: #FF0000;  /* Red corner */
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+  width: 16px;
+  height: 16px;
+  background: #FF0000;  /* Red corner */
 }
 
 .header {
@@ -14,20 +46,25 @@
   flex-direction: column;
   gap: var(--space-3);
   margin-bottom: var(--space-6);
+  padding-bottom: var(--space-4);
+  border-bottom: 2px solid #333;
 }
 
 .title {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--text-primary);
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-xl);
+  color: #FFD700;  /* Yellow title */
+  text-shadow: 0 0 4px #FFD700;
   margin: 0;
+  text-transform: uppercase;
 }
 
 .subtitle {
   text-align: center;
-  color: var(--text-secondary);
-  margin: 0 0 var(--space-6) 0;
-  font-size: var(--font-size-base);
+  color: #FFF;  /* White subtitle */
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
 }
 
 .form {
@@ -43,56 +80,63 @@
   gap: var(--space-2);
   cursor: pointer;
   user-select: none;
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  color: #FFF;
 }
 
 .checkbox input {
   width: 16px;
   height: 16px;
   cursor: pointer;
-  accent-color: var(--gold-primary);
+  accent-color: #FFD700;
 }
 
 .checkbox:hover {
-  color: var(--text-primary);
+  color: #FFD700;
 }
 
 .error {
   padding: var(--space-3) var(--space-4);
-  background-color: rgba(255, 107, 107, 0.1);
-  border: 1px solid var(--danger);
-  border-radius: var(--radius-md);
-  color: var(--danger);
-  font-size: var(--font-size-sm);
+  background-color: #1a0000;
+  border: 2px solid #FF0000;  /* Red error border */
+  color: #FF0000;  /* Red error text */
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  text-transform: uppercase;
   margin-bottom: var(--space-4);
 }
 
 .footer {
   text-align: center;
-  color: var(--text-secondary);
-  font-size: var(--font-size-sm);
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  color: #FFF;
   margin: 0;
+  padding-top: var(--space-4);
+  border-top: 2px solid #333;
 }
 
 .link {
-  color: var(--gold-primary);
+  color: #FFD700;  /* Yellow link */
   text-decoration: none;
-  font-weight: var(--font-weight-semibold);
-  transition: color var(--transition-base);
+  transition: color var(--transition-fast);
 }
 
 .link:hover {
-  color: var(--gold-secondary);
+  color: #FF0000;  /* Red on hover */
 }
 
 @media (max-width: 480px) {
+  .pageWrapper {
+    padding: var(--space-4);
+  }
+
   .card {
     max-width: 100%;
-    border-radius: var(--radius-lg);
   }
 
   .title {
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-lg);
   }
 }

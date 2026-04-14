@@ -105,73 +105,75 @@ export default function RegisterPage() {
   };
 
   return (
-    <Card variant="glass" padding="lg" className={styles.card}>
-      <div className={styles.header}>
-        <LogoIcon size={40} color="var(--gold-primary)" />
-        <h1 className={styles.title}>Join Arena</h1>
-      </div>
-
-      <p className={styles.subtitle}>Create your account to get started</p>
-
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <Input
-          label="Full Name"
-          placeholder="John Doe"
-          value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          error={errors.name}
-          autoComplete="name"
-        />
-
-        <Input
-          label="Email"
-          type="email"
-          placeholder="your@email.com"
-          value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          error={errors.email}
-          autoComplete="email"
-        />
-
-        <div className={styles.passwordField}>
-          <Input
-            label="Password"
-            type="password"
-            placeholder="••••••••"
-            value={formData.password}
-            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-            error={errors.password}
-            autoComplete="new-password"
-          />
-          {formData.password && (
-            <div className={styles.strengthMeter}>
-              <div className={`${styles.bar} ${styles[passwordStrength.level]}`} />
-              <span className={styles.label}>{passwordStrength.level}</span>
-            </div>
-          )}
+    <div className={styles.pageWrapper}>
+      <Card variant="default" padding="lg" className={styles.card}>
+        <div className={styles.header}>
+          <LogoIcon size={40} color="#FFD700" />
+          <h1 className={styles.title}>NEW PLAYER</h1>
         </div>
 
-        <Input
-          label="Confirm Password"
-          type="password"
-          placeholder="••••••••"
-          value={formData.confirmPassword}
-          onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-          error={errors.confirmPassword}
-          autoComplete="new-password"
-        />
+        <p className={styles.subtitle}>CREATE YOUR PROFILE</p>
 
-        <Button type="submit" variant="primary" size="lg" fullWidth loading={loading}>
-          Create Account
-        </Button>
-      </form>
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <Input
+            label="NAME"
+            placeholder="Player One"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            error={errors.name}
+            autoComplete="name"
+          />
 
-      <p className={styles.footer}>
-        Already have an account?{' '}
-        <Link href="/login" className={styles.link}>
-          Sign in
-        </Link>
-      </p>
-    </Card>
+          <Input
+            label="EMAIL"
+            type="email"
+            placeholder="player@arena.com"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            error={errors.email}
+            autoComplete="email"
+          />
+
+          <div className={styles.passwordField}>
+            <Input
+              label="PASSWORD"
+              type="password"
+              placeholder="********"
+              value={formData.password}
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+              error={errors.password}
+              autoComplete="new-password"
+            />
+            {formData.password && (
+              <div className={styles.strengthMeter}>
+                <div className={`${styles.bar} ${styles[passwordStrength.level]}`} />
+                <span className={styles.label}>{passwordStrength.level}</span>
+              </div>
+            )}
+          </div>
+
+          <Input
+            label="CONFIRM"
+            type="password"
+            placeholder="********"
+            value={formData.confirmPassword}
+            onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+            error={errors.confirmPassword}
+            autoComplete="new-password"
+          />
+
+          <Button type="submit" variant="primary" size="lg" fullWidth loading={loading}>
+            CREATE PLAYER
+          </Button>
+        </form>
+
+        <p className={styles.footer}>
+          ALREADY HAVE AN ACCOUNT?{' '}
+          <Link href="/login" className={styles.link}>
+            SIGN IN
+          </Link>
+        </p>
+      </Card>
+    </div>
   );
 }
