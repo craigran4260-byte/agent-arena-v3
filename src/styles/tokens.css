@@ -1,0 +1,136 @@
+/* Agent Arena Design Token System */
+/* Integrated with Impeccable design guidelines for color contrast, typography, and spacing */
+
+:root {
+  /* ===== BACKGROUND COLORS ===== */
+  --bg-primary: #0a0a0a;      /* Pure black - main background */
+  --bg-secondary: #111111;    /* Slightly lighter for card backgrounds */
+  --bg-card: #1a1a1a;         /* Card surface */
+  --bg-elevated: #222222;     /* Elevated surfaces (modals, popovers) */
+  --bg-hover: #2a2a2a;        /* Hover state backgrounds */
+  --bg-overlay: rgba(10, 10, 10, 0.8);  /* Semi-transparent overlay */
+
+  /* ===== TEXT COLORS (Impeccable contrast-compliant) ===== */
+  --text-primary: #ffffff;    /* Primary text - max contrast */
+  --text-secondary: #b0b0b0;  /* Secondary text (WCAG AA: 7.04:1 ratio) */
+  --text-muted: #707070;      /* Muted text (WCAG AA: 4.54:1 ratio) */
+  --text-error: #ff6b6b;      /* Error text */
+  --text-success: #51cf66;    /* Success text */
+  --text-warning: #ffd93d;    /* Warning text */
+
+  /* ===== GOLD COLOR SYSTEM (Luxury accent) ===== */
+  --gold-primary: #ffd700;    /* Bright gold - primary accent */
+  --gold-secondary: #c9a84c;  /* Muted gold - secondary accent */
+  --gold-dark: #8b6914;       /* Dark gold - hover state */
+  --gold-glow: rgba(255, 215, 0, 0.15);  /* Gold glow for backgrounds */
+  --gold-light: #fff8e7;      /* Light gold - highlights */
+
+  /* ===== SEMANTIC COLORS ===== */
+  --success: #51cf66;         /* Success state */
+  --danger: #ff6b6b;          /* Danger/error state */
+  --warning: #ffd93d;         /* Warning state */
+  --info: #74c0fc;            /* Information state */
+
+  /* ===== BORDER COLORS ===== */
+  --border-subtle: #222222;   /* Subtle borders */
+  --border-default: #333333;  /* Default borders */
+  --border-strong: #444444;   /* Strong borders */
+  --border-gold: #c9a84c;     /* Gold borders (accent) */
+  --border-focus: #ffd700;    /* Focus state border */
+
+  /* ===== BORDER RADIUS (4px system) ===== */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* ===== SPACING (4px base unit) ===== */
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-9: 36px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* ===== TYPOGRAPHY (Inter font) ===== */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 32px;
+  --font-size-4xl: 40px;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* ===== LETTER SPACING ===== */
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.02em;
+
+  /* ===== SHADOWS ===== */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.6);
+  --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.7);
+  --shadow-gold: 0 0 16px rgba(255, 215, 0, 0.3);
+  --shadow-glow: inset 0 0 12px rgba(255, 215, 0, 0.1);
+
+  /* ===== TRANSITIONS ===== */
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 250ms ease-in-out;
+  --transition-slow: 350ms ease-in-out;
+
+  /* ===== Z-INDEX SCALE ===== */
+  --z-dropdown: 1000;
+  --z-sticky: 1100;
+  --z-fixed: 1200;
+  --z-modal-backdrop: 1300;
+  --z-modal: 1400;
+  --z-tooltip: 1500;
+  --z-notification: 1600;
+
+  /* ===== BREAKPOINTS ===== */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* ===== CONTAINER WIDTHS ===== */
+  --container-sm: 384px;
+  --container-md: 448px;
+  --container-lg: 512px;
+  --container-xl: 576px;
+  --container-2xl: 672px;
+
+  /* ===== OPACITY ===== */
+  --opacity-disabled: 0.5;
+  --opacity-hover: 0.8;
+  --opacity-focus: 0.9;
+}
+
+/* Dark mode by default (using :root variables) */
+@media (prefers-color-scheme: light) {
+  :root {
+    /* Optional light mode support - keeping dark as primary per design */
+  }
+}

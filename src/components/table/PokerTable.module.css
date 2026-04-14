@@ -1,0 +1,231 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8);
+  min-height: 600px;
+}
+
+.tableWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  aspect-ratio: 16 / 9;
+}
+
+.table {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 3px solid var(--border-gold);
+  border-radius: 50% / 35%;
+  background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
+  box-shadow:
+    0 0 30px var(--gold-glow),
+    inset 0 0 30px rgba(0, 0, 0, 0.3);
+}
+
+.potDisplay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+}
+
+.potLabel {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-1);
+}
+
+.potValue {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--gold-primary);
+  font-family: 'Monaco', monospace;
+}
+
+/* V3: Delay Indicator for Spectators */
+.delayIndicator {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  z-index: 20;
+}
+
+.delayBadge {
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  background: var(--orange-500);
+  color: white;
+  border-radius: var(--radius-sm);
+}
+
+.delayText {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+}
+
+/* Seat folded state */
+.seatFolded {
+  opacity: 0.6;
+}
+
+/* Player positions around the table (9 seats) */
+.playerSlot {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Seat positions - arranged in ellipse around table */
+/* Dealer Button Position - Bottom Center */
+.seat1 {
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Seats 2 & 9 - Lower corners */
+.seat2 {
+  bottom: 18%;
+  right: 12%;
+}
+
+.seat9 {
+  bottom: 18%;
+  left: 12%;
+}
+
+/* Seats 3 & 8 - Side positions */
+.seat3 {
+  right: 6%;
+  top: 38%;
+  transform: translateY(-50%);
+}
+
+.seat8 {
+  left: 6%;
+  top: 38%;
+  transform: translateY(-50%);
+}
+
+/* Seats 4 & 7 - Upper side positions */
+.seat4 {
+  right: 12%;
+  top: 20%;
+}
+
+.seat7 {
+  left: 12%;
+  top: 20%;
+}
+
+/* Seats 5 & 6 - Top positions */
+.seat5 {
+  top: 8%;
+  right: 25%;
+}
+
+.seat6 {
+  top: 8%;
+  left: 25%;
+}
+
+.emptySlot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border: 2px dashed var(--border-default);
+  border-radius: var(--radius-lg);
+  background-color: rgba(0, 0, 0, 0.2);
+  color: var(--text-muted);
+  font-size: var(--font-size-sm);
+  transition: all var(--transition-base);
+}
+
+.emptySlot:hover {
+  border-color: var(--gold-primary);
+  background-color: rgba(255, 215, 0, 0.05);
+}
+
+.seatNumber {
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--space-4);
+    min-height: 400px;
+  }
+
+  .tableWrapper {
+    max-width: 100%;
+  }
+
+  .playerSlot {
+    width: 80px;
+    height: 80px;
+  }
+
+  .potValue {
+    font-size: var(--font-size-lg);
+  }
+
+  /* Adjust seat positions for mobile */
+  .seat1 {
+    bottom: 5%;
+  }
+
+  .seat2 {
+    bottom: 15%;
+    right: 8%;
+  }
+
+  .seat9 {
+    bottom: 15%;
+    left: 8%;
+  }
+
+  .seat3 {
+    right: 3%;
+  }
+
+  .seat8 {
+    left: 3%;
+  }
+
+  .seat4 {
+    right: 8%;
+    top: 18%;
+  }
+
+  .seat7 {
+    left: 8%;
+    top: 18%;
+  }
+
+  .seat5 {
+    top: 5%;
+    right: 20%;
+  }
+
+  .seat6 {
+    top: 5%;
+    left: 20%;
+  }
+}

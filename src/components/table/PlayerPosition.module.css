@@ -1,0 +1,284 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-3);
+  background: var(--surface-primary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-default);
+  transition: all var(--transition-base);
+  min-width: 100px;
+}
+
+.container:hover {
+  border-color: var(--border-hover);
+}
+
+.active {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 8px var(--gold-glow);
+  animation: pulseActive 1.5s ease-in-out infinite;
+}
+
+.folded {
+  opacity: 0.5;
+  background: var(--surface-secondary);
+}
+
+@keyframes pulseActive {
+  0%, 100% {
+    box-shadow: 0 0 8px var(--gold-glow);
+  }
+  50% {
+    box-shadow: 0 0 16px var(--gold-glow);
+  }
+}
+
+/* Position Badge (V3 - Poker positions) */
+.positionBadge {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--radius-sm);
+  background: var(--surface-secondary);
+  color: var(--text-secondary);
+  z-index: 20;
+}
+
+.positionBadge.button {
+  background: var(--accent-primary);
+  color: var(--text-on-primary);
+}
+
+.positionBadge.smallBlind {
+  background: var(--blue-600);
+  color: white;
+}
+
+.positionBadge.bigBlind {
+  background: var(--red-600);
+  color: white;
+}
+
+/* Dealer Chip */
+.dealerChip {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  background: white;
+  border: 2px solid black;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+  color: black;
+  z-index: 15;
+}
+
+/* Player Info */
+.playerInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.avatarFolded {
+  opacity: 0.6;
+}
+
+.nameSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.name {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  max-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chipsRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--gold-primary);
+}
+
+.chips {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  font-family: 'Monaco', monospace;
+}
+
+/* V3: Current Bet */
+.currentBet {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  padding: var(--space-1) var(--space-2);
+  background: var(--surface-secondary);
+  border-radius: var(--radius-sm);
+}
+
+/* Action Label */
+.actionLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--radius-md);
+  margin-top: var(--space-2);
+  animation: actionPop 0.3s ease-out;
+}
+
+@keyframes actionPop {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.actionFold {
+  background: var(--gray-700);
+  color: var(--text-muted);
+}
+
+.actionCheck {
+  background: var(--blue-100);
+  color: var(--blue-700);
+}
+
+.actionCall {
+  background: var(--green-100);
+  color: var(--green-700);
+}
+
+.actionRaise {
+  background: var(--orange-100);
+  color: var(--orange-700);
+}
+
+.actionAllIn {
+  background: var(--red-600);
+  color: white;
+}
+
+/* All-in Badge */
+.allInBadge {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  background: var(--red-600);
+  color: white;
+  border-radius: var(--radius-sm);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateX(-50%) translateY(8px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Active Indicator */
+.activeIndicator {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: var(--accent-primary);
+  border-radius: 50%;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Folded Overlay */
+.foldedOverlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-muted);
+  opacity: 0.8;
+  z-index: 10;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--space-2);
+    min-width: 60px;
+  }
+
+  .name {
+    font-size: 10px;
+    max-width: 60px;
+  }
+
+  .chips {
+    font-size: 10px;
+  }
+
+  .positionBadge {
+    font-size: 8px;
+    padding: 2px 4px;
+  }
+
+  .dealerChip {
+    width: 18px;
+    height: 18px;
+    font-size: 8px;
+  }
+
+  .actionLabel {
+    padding: var(--space-1) var(--space-2);
+    font-size: 10px;
+  }
+
+  .currentBet {
+    font-size: 10px;
+    padding: 2px 4px;
+  }
+}

@@ -1,0 +1,98 @@
+.nav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 240px;
+  background: var(--surface-primary);
+  border-right: 1px solid var(--border-default);
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-4);
+  z-index: 100;
+}
+
+.logo {
+  padding: var(--space-4) var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.logoLink {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--gold-primary);
+  text-decoration: none;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  flex: 1;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-2);
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.navLink:hover {
+  background: var(--surface-secondary);
+  color: var(--text-primary);
+}
+
+.navLink.active {
+  background: var(--surface-secondary);
+  color: var(--gold-primary);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+/* V3: Highlight prominent links (Developer Docs) */
+.highlight {
+  background: linear-gradient(135deg, var(--gold-primary), var(--gold-secondary));
+  color: var(--text-on-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.highlight:hover {
+  background: linear-gradient(135deg, var(--gold-secondary), var(--gold-primary));
+  color: var(--text-on-primary);
+  transform: scale(1.02);
+}
+
+.highlight.active {
+  background: var(--gold-primary);
+}
+
+.userSection {
+  padding: var(--space-4) var(--space-2);
+  border-top: 1px solid var(--border-default);
+}
+
+.userName {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+/* Responsive - Hide on mobile, use MobileNav instead */
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+  }
+}
