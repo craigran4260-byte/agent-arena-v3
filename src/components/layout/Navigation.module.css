@@ -1,27 +1,53 @@
+/* Arcade Navigation Styles */
+
 .nav {
   position: fixed;
   left: 0;
   top: 0;
   bottom: 0;
-  width: 240px;
-  background: var(--surface-primary);
-  border-right: 1px solid var(--border-default);
+  width: 200px;
+  background: var(--bg-dark);
+  border-right: 4px solid var(--neon-cyan);
   display: flex;
   flex-direction: column;
   padding: var(--space-4);
   z-index: 100;
 }
 
+/* Scanline effect on nav */
+.nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.1) 2px,
+    rgba(0, 0, 0, 0.1) 4px
+  );
+  pointer-events: none;
+}
+
 .logo {
   padding: var(--space-4) var(--space-2);
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-6);
+  border-bottom: 2px solid var(--border-pixel);
 }
 
 .logoLink {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--gold-primary);
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-sm);
+  color: var(--neon-cyan);
   text-decoration: none;
+  text-shadow: var(--shadow-neon-cyan);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-pixel);
+}
+
+.logoLink:hover {
+  color: var(--neon-magenta);
+  text-shadow: var(--shadow-neon-magenta);
 }
 
 .links {
@@ -36,58 +62,84 @@
   align-items: center;
   gap: var(--space-3);
   padding: var(--space-3) var(--space-2);
+  font-family: var(--font-pixel);
+  font-size: 10px;
   color: var(--text-secondary);
   text-decoration: none;
-  border-radius: var(--radius-md);
+  border: 2px solid transparent;
+  background: transparent;
   transition: all var(--transition-fast);
+  text-transform: uppercase;
 }
 
 .navLink:hover {
-  background: var(--surface-secondary);
-  color: var(--text-primary);
+  color: var(--neon-cyan);
+  border-color: var(--neon-cyan);
+  background: rgba(0, 255, 255, 0.05);
 }
 
 .navLink.active {
-  background: var(--surface-secondary);
-  color: var(--gold-primary);
+  color: var(--neon-lime);
+  border-color: var(--neon-lime);
+  background: rgba(0, 255, 0, 0.1);
+  box-shadow: 0 0 4px rgba(0, 255, 0, 0.3);
 }
 
 .icon {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--text-secondary);
+}
+
+.navLink:hover .icon,
+.navLink.active .icon {
+  color: inherit;
 }
 
 .label {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  text-transform: uppercase;
 }
 
-/* V3: Highlight prominent links (Developer Docs) */
+/* Highlight prominent links (Developer Docs) - arcade button style */
 .highlight {
-  background: linear-gradient(135deg, var(--gold-primary), var(--gold-secondary));
-  color: var(--text-on-primary);
-  font-weight: var(--font-weight-bold);
+  background: var(--neon-lime);
+  color: var(--bg-deep);
+  border: 2px solid var(--neon-lime);
+  font-weight: normal;
+  box-shadow:
+    inset -2px -2px 0 rgba(0, 0, 0, 0.4),
+    inset 2px 2px 0 rgba(255, 255, 255, 0.3);
 }
 
 .highlight:hover {
-  background: linear-gradient(135deg, var(--gold-secondary), var(--gold-primary));
-  color: var(--text-on-primary);
-  transform: scale(1.02);
+  background: var(--neon-cyan);
+  border-color: var(--neon-cyan);
+  color: var(--bg-deep);
+  transform: translateY(-2px);
+  box-shadow:
+    inset -2px -2px 0 rgba(0, 0, 0, 0.4),
+    inset 2px 2px 0 rgba(255, 255, 255, 0.3),
+    0 0 8px var(--neon-cyan);
 }
 
 .highlight.active {
-  background: var(--gold-primary);
+  background: var(--neon-lime);
+  border-color: var(--neon-lime);
 }
 
 .userSection {
   padding: var(--space-4) var(--space-2);
-  border-top: 1px solid var(--border-default);
+  border-top: 2px solid var(--border-pixel);
 }
 
 .userName {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  color: var(--neon-magenta);
+  text-transform: uppercase;
 }
 
 /* Responsive - Hide on mobile, use MobileNav instead */

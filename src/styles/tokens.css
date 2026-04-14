@@ -1,103 +1,123 @@
-/* Agent Arena Design Token System */
-/* Integrated with Impeccable design guidelines for color contrast, typography, and spacing */
+/* Agent Arena V3 - Retro Arcade Design Token System */
+/* Inspired by 80s arcade cabinets, 8-bit games, neon lights */
 
 :root {
+  /* ===== NEON COLORS ===== */
+  --neon-cyan: #00FFFF;
+  --neon-magenta: #FF00FF;
+  --neon-pink: #FF69B4;
+  --neon-lime: #00FF00;
+  --neon-orange: #FF6600;
+  --neon-yellow: #FFFF00;
+  --neon-red: #FF0040;
+  --neon-blue: #0080FF;
+
   /* ===== BACKGROUND COLORS ===== */
-  --bg-primary: #0a0a0a;      /* Pure black - main background */
-  --bg-secondary: #111111;    /* Slightly lighter for card backgrounds */
-  --bg-card: #1a1a1a;         /* Card surface */
-  --bg-elevated: #222222;     /* Elevated surfaces (modals, popovers) */
-  --bg-hover: #2a2a2a;        /* Hover state backgrounds */
-  --bg-overlay: rgba(10, 10, 10, 0.8);  /* Semi-transparent overlay */
+  --bg-deep: #0a0a2e;         /* Midnight blue - main background */
+  --bg-purple: #1a0033;        /* Deep purple - card backgrounds */
+  --bg-dark: #0d0d1a;          /* Near black - elevated surfaces */
+  --bg-card: #12062a;          /* Card surface */
+  --bg-elevated: #0f0f24;      /* Elevated surfaces (modals, popovers) */
+  --bg-hover: #1a1a3e;         /* Hover state backgrounds */
+  --bg-overlay: rgba(10, 10, 46, 0.85);  /* Semi-transparent overlay */
+  --bg-arcade: #000020;        /* Arcade cabinet black */
 
-  /* ===== TEXT COLORS (Impeccable contrast-compliant) ===== */
-  --text-primary: #ffffff;    /* Primary text - max contrast */
-  --text-secondary: #b0b0b0;  /* Secondary text (WCAG AA: 7.04:1 ratio) */
-  --text-muted: #707070;      /* Muted text (WCAG AA: 4.54:1 ratio) */
-  --text-error: #ff6b6b;      /* Error text */
-  --text-success: #51cf66;    /* Success text */
-  --text-warning: #ffd93d;    /* Warning text */
+  /* ===== TEXT COLORS ===== */
+  --text-primary: #FFFFFF;     /* Primary text */
+  --text-secondary: #B0B0FF;   /* Secondary text - purple tint */
+  --text-muted: #6060AA;       /* Muted text */
+  --text-neon: var(--neon-cyan);  /* Neon highlight text */
+  --text-pixel: #CCCCCC;       /* Pixel text */
+  --text-error: #FF0040;       /* Error text - neon red */
+  --text-success: var(--neon-lime);  /* Success text */
+  --text-warning: var(--neon-orange);  /* Warning text */
 
-  /* ===== GOLD COLOR SYSTEM (Luxury accent) ===== */
-  --gold-primary: #ffd700;    /* Bright gold - primary accent */
-  --gold-secondary: #c9a84c;  /* Muted gold - secondary accent */
-  --gold-dark: #8b6914;       /* Dark gold - hover state */
-  --gold-glow: rgba(255, 215, 0, 0.15);  /* Gold glow for backgrounds */
-  --gold-light: #fff8e7;      /* Light gold - highlights */
-
-  /* ===== SEMANTIC COLORS ===== */
-  --success: #51cf66;         /* Success state */
-  --danger: #ff6b6b;          /* Danger/error state */
-  --warning: #ffd93d;         /* Warning state */
-  --info: #74c0fc;            /* Information state */
+  /* ===== GAME STATUS COLORS ===== */
+  --status-active: var(--neon-cyan);
+  --status-winner: var(--neon-lime);
+  --status-folded: var(--text-muted);
+  --status-warning: var(--neon-orange);
+  --status-danger: var(--neon-red);
 
   /* ===== BORDER COLORS ===== */
-  --border-subtle: #222222;   /* Subtle borders */
-  --border-default: #333333;  /* Default borders */
-  --border-strong: #444444;   /* Strong borders */
-  --border-gold: #c9a84c;     /* Gold borders (accent) */
-  --border-focus: #ffd700;    /* Focus state border */
+  --border-neon: var(--neon-cyan);     /* Primary neon border */
+  --border-pixel: #4040AA;             /* Pixel border */
+  --border-accent: var(--neon-magenta);  /* Accent border */
+  --border-subtle: #2a2a4a;            /* Subtle borders */
+  --border-strong: #4a4a8a;            /* Strong borders */
+  --border-focus: var(--neon-cyan);    /* Focus state border */
 
-  /* ===== BORDER RADIUS (4px system) ===== */
-  --radius-xs: 2px;
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
+  /* ===== BORDER RADIUS (Pixel-perfect) ===== */
+  --radius-none: 0;           /* Pixel-perfect corners */
+  --radius-pixel: 4px;        /* Small pixel radius */
+  --radius-chunky: 8px;       /* Chunky arcade corners */
+  --radius-arcade: 12px;      /* Arcade cabinet corners */
   --radius-full: 9999px;
 
-  /* ===== SPACING (4px base unit) ===== */
+  /* ===== SPACING (4px base unit - pixel grid) ===== */
   --space-0: 0;
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
+  --space-1: 4px;             /* 1 pixel unit */
+  --space-2: 8px;             /* 2 pixel units */
+  --space-3: 12px;            /* 3 pixel units */
+  --space-4: 16px;            /* 4 pixel units */
   --space-5: 20px;
-  --space-6: 24px;
+  --space-6: 24px;            /* 6 pixel units */
   --space-7: 28px;
-  --space-8: 32px;
+  --space-8: 32px;            /* 8 pixel units */
   --space-9: 36px;
   --space-10: 40px;
   --space-12: 48px;
   --space-16: 64px;
 
-  /* ===== TYPOGRAPHY (Inter font) ===== */
-  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-size-xs: 12px;
-  --font-size-sm: 14px;
-  --font-size-base: 16px;
-  --font-size-lg: 18px;
-  --font-size-xl: 20px;
-  --font-size-2xl: 24px;
-  --font-size-3xl: 32px;
-  --font-size-4xl: 40px;
+  /* ===== TYPOGRAPHY ===== */
+  /* Pixel fonts for arcade aesthetic */
+  --font-pixel: 'Press Start 2P', monospace;  /* Headlines, scores */
+  --font-mono: 'Space Mono', 'Courier New', monospace;  /* Body, data */
+  --font-system: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;  /* Fallback */
+
+  --font-size-xs: 10px;       /* Tiny pixel text */
+  --font-size-sm: 12px;       /* Small pixel text */
+  --font-size-base: 14px;     /* Base pixel text */
+  --font-size-lg: 16px;       /* Large pixel text */
+  --font-size-xl: 20px;       /* XL pixel text */
+  --font-size-2xl: 24px;      /* Score display */
+  --font-size-3xl: 32px;      /* Headlines */
+  --font-size-4xl: 48px;      /* Hero headlines */
+  --font-size-score: 64px;    /* Big score numbers */
 
   --font-weight-normal: 400;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
   --line-height-tight: 1.2;
   --line-height-normal: 1.5;
-  --line-height-relaxed: 1.75;
+  --line-height-pixel: 1.4;
 
   /* ===== LETTER SPACING ===== */
-  --letter-spacing-tight: -0.02em;
-  --letter-spacing-normal: 0;
-  --letter-spacing-wide: 0.02em;
+  --letter-spacing-pixel: 0.1em;  /* Pixel font spacing */
+  --letter-spacing-wide: 0.05em;
 
   /* ===== SHADOWS ===== */
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.6);
-  --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.7);
-  --shadow-gold: 0 0 16px rgba(255, 215, 0, 0.3);
-  --shadow-glow: inset 0 0 12px rgba(255, 215, 0, 0.1);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.7);
+  --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.8);
+
+  /* Neon glow shadows */
+  --shadow-neon-cyan: 0 0 8px var(--neon-cyan), 0 0 16px var(--neon-cyan), 0 0 32px rgba(0, 255, 255, 0.3);
+  --shadow-neon-magenta: 0 0 8px var(--neon-magenta), 0 0 16px var(--neon-magenta), 0 0 32px rgba(255, 0, 255, 0.3);
+  --shadow-neon-lime: 0 0 8px var(--neon-lime), 0 0 16px var(--neon-lime);
+  --shadow-neon-pink: 0 0 8px var(--neon-pink), 0 0 16px var(--neon-pink);
+  --shadow-neon-orange: 0 0 8px var(--neon-orange), 0 0 16px var(--neon-orange);
+
+  /* Arcade button 3D effect */
+  --shadow-button-inset: inset -4px -4px 0 rgba(0, 0, 0, 0.4), inset 4px 4px 0 rgba(255, 255, 255, 0.2);
+  --shadow-button-pressed: inset 2px 2px 0 rgba(0, 0, 0, 0.6);
 
   /* ===== TRANSITIONS ===== */
-  --transition-fast: 150ms ease-in-out;
-  --transition-base: 250ms ease-in-out;
-  --transition-slow: 350ms ease-in-out;
+  --transition-fast: 100ms ease-out;  /* Quick arcade response */
+  --transition-base: 200ms ease-out;
+  --transition-slow: 400ms ease-out;
+  --transition-bounce: 200ms cubic-bezier(0.68, -0.55, 0.265, 1.55);  /* Bounce effect */
 
   /* ===== Z-INDEX SCALE ===== */
   --z-dropdown: 1000;
@@ -107,6 +127,7 @@
   --z-modal: 1400;
   --z-tooltip: 1500;
   --z-notification: 1600;
+  --z-scanline: 1;             /* CRT scanline overlay */
 
   /* ===== BREAKPOINTS ===== */
   --breakpoint-sm: 640px;
@@ -124,13 +145,21 @@
 
   /* ===== OPACITY ===== */
   --opacity-disabled: 0.5;
-  --opacity-hover: 0.8;
-  --opacity-focus: 0.9;
+  --opacity-scanline: 0.08;   /* CRT scanline opacity */
+  --opacity-glow: 0.6;
+
+  /* ===== PIXEL CHIP COLORS ===== */
+  --chip-gold: #FFD700;
+  --chip-red: #FF3333;
+  --chip-blue: #3399FF;
+  --chip-green: #33FF33;
+  --chip-white: #FFFFFF;
+  --chip-purple: #FF33FF;
 }
 
-/* Dark mode by default (using :root variables) */
+/* Dark mode only - arcade aesthetic is always dark */
 @media (prefers-color-scheme: light) {
   :root {
-    /* Optional light mode support - keeping dark as primary per design */
+    /* Keep arcade aesthetic regardless of system preference */
   }
 }

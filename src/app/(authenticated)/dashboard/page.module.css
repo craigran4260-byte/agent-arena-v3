@@ -1,12 +1,15 @@
+/* Arcade Dashboard Styles */
+
 .container {
   padding: var(--space-6);
   max-width: 1400px;
   margin: 0 auto;
 }
 
+/* Stats Grid - Arcade HUD */
 .statsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--space-4);
   margin-bottom: var(--space-8);
 }
@@ -16,10 +19,13 @@
 }
 
 .sectionTitle {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--text-primary);
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-base);
+  color: var(--neon-cyan);
+  text-shadow: var(--shadow-neon-cyan);
   margin: 0 0 var(--space-4) 0;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-pixel);
 }
 
 @media (max-width: 1024px) {
@@ -45,5 +51,9 @@
 
   .section {
     margin-bottom: var(--space-6);
+  }
+
+  .sectionTitle {
+    font-size: var(--font-size-sm);
   }
 }

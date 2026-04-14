@@ -1,60 +1,86 @@
+/* Arcade Badge Styles */
+
 .badge {
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-pixel);
+  border-radius: var(--radius-none);
+  border: 2px solid transparent;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-weight: var(--font-weight-semibold);
-  border-radius: var(--radius-full);
+  padding: var(--space-1) var(--space-2);
+  gap: var(--space-1);
   white-space: nowrap;
 }
 
+/* Sizes */
 .sm {
-  padding: var(--space-1) var(--space-2);
-  font-size: var(--font-size-xs);
+  font-size: 8px;
+  padding: 2px var(--space-1);
 }
 
 .md {
-  padding: var(--space-2) var(--space-3);
-  font-size: var(--font-size-sm);
+  font-size: 10px;
+  padding: var(--space-1) var(--space-2);
 }
 
+/* Variants */
+
+/* Default - cyan badge */
 .default {
-  background-color: var(--bg-card);
-  color: var(--text-primary);
-  border: 1px solid var(--border-default);
+  background-color: rgba(0, 255, 255, 0.15);
+  color: var(--neon-cyan);
+  border-color: var(--neon-cyan);
 }
 
+/* Success - lime badge */
 .success {
-  background-color: rgba(81, 207, 102, 0.1);
-  color: var(--success);
-  border: 1px solid var(--success);
+  background-color: rgba(0, 255, 0, 0.15);
+  color: var(--neon-lime);
+  border-color: var(--neon-lime);
+  box-shadow: 0 0 4px rgba(0, 255, 0, 0.3);
 }
 
+/* Warning - orange badge */
 .warning {
-  background-color: rgba(255, 217, 61, 0.1);
-  color: var(--warning);
-  border: 1px solid var(--warning);
+  background-color: rgba(255, 102, 0, 0.15);
+  color: var(--neon-orange);
+  border-color: var(--neon-orange);
 }
 
+/* Danger - red badge */
 .danger {
-  background-color: rgba(255, 107, 107, 0.1);
-  color: var(--danger);
-  border: 1px solid var(--danger);
+  background-color: rgba(255, 0, 64, 0.15);
+  color: var(--neon-red);
+  border-color: var(--neon-red);
+  box-shadow: 0 0 4px rgba(255, 0, 64, 0.3);
 }
 
+/* Gold - yellow badge (for chips/rewards) */
 .gold {
   background-color: rgba(255, 215, 0, 0.15);
-  color: var(--gold-primary);
-  border: 1px solid var(--gold-primary);
+  color: var(--neon-yellow);
+  border-color: var(--neon-yellow);
+  box-shadow: 0 0 4px rgba(255, 215, 0, 0.3);
 }
 
+/* Error - same as danger */
 .error {
-  background-color: rgba(255, 107, 107, 0.1);
-  color: var(--danger);
-  border: 1px solid var(--danger);
+  background-color: rgba(255, 0, 64, 0.15);
+  color: var(--neon-red);
+  border-color: var(--neon-red);
 }
 
+/* Info - blue badge */
 .info {
-  background-color: rgba(59, 130, 246, 0.1);
-  color: var(--info);
-  border: 1px solid var(--info);
+  background-color: rgba(0, 128, 255, 0.15);
+  color: var(--neon-blue);
+  border-color: var(--neon-blue);
+}
+
+/* Active/pulse animation */
+.badgeActive {
+  animation: pulseGlow 2s ease-in-out infinite;
 }

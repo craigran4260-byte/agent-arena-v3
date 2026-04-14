@@ -1,3 +1,5 @@
+/* Arcade Player Position Styles */
+
 .container {
   position: relative;
   display: flex;
@@ -5,55 +7,61 @@
   align-items: center;
   gap: var(--space-2);
   padding: var(--space-2);
-  background-color: rgba(0, 0, 0, 0.3);
-  border: 2px solid var(--border-default);
-  border-radius: var(--radius-lg);
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 3px solid var(--border-pixel);
+  border-radius: 0;
   transition: all var(--transition-base);
 }
 
 .container.active {
-  border-color: var(--gold-primary);
-  background-color: rgba(255, 215, 0, 0.1);
-  box-shadow: 0 0 15px var(--gold-glow);
+  border-color: var(--neon-lime);
+  background-color: rgba(0, 255, 0, 0.1);
+  box-shadow: var(--shadow-neon-lime);
 }
 
+/* Dealer button - pixel style */
 .dealerButton {
   position: absolute;
-  top: -12px;
-  right: -12px;
+  top: -14px;
+  right: -14px;
   width: 28px;
   height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  background-color: var(--gold-primary);
-  color: var(--bg-primary);
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-sm);
+  border-radius: 0;
+  background-color: var(--neon-lime);
+  color: var(--bg-deep);
+  font-family: var(--font-pixel);
+  font-size: 10px;
   z-index: 20;
+  box-shadow: 0 0 8px var(--neon-lime);
 }
 
+/* Blind badge - arcade style */
 .blindBadge {
   position: absolute;
   top: -10px;
   left: 50%;
   transform: translateX(-50%);
   padding: var(--space-1) var(--space-2);
-  border-radius: var(--radius-sm);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-bold);
+  border-radius: 0;
+  font-family: var(--font-pixel);
+  font-size: 8px;
   z-index: 20;
+  text-transform: uppercase;
 }
 
 .blindBadge.smallBlind {
-  background-color: var(--info);
+  background-color: var(--neon-blue);
   color: #fff;
+  border: 2px solid var(--neon-blue);
 }
 
 .blindBadge.bigBlind {
-  background-color: var(--warning);
-  color: #000;
+  background-color: var(--neon-orange);
+  color: var(--bg-deep);
+  border: 2px solid var(--neon-orange);
 }
 
 .playerInfo {
@@ -71,9 +79,9 @@
 }
 
 .name {
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-semibold);
-  color: var(--text-primary);
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  color: var(--neon-cyan);
   max-width: 100px;
   white-space: nowrap;
   overflow: hidden;
@@ -81,76 +89,73 @@
 }
 
 .chips {
-  font-size: var(--font-size-xs);
-  color: var(--gold-primary);
-  font-weight: var(--font-weight-bold);
-  font-family: 'Monaco', monospace;
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  color: var(--neon-lime);
 }
 
+/* Action label - arcade style */
 .actionLabel {
   display: flex;
   align-items: center;
   gap: var(--space-1);
   padding: var(--space-1) var(--space-2);
-  border-radius: var(--radius-sm);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-bold);
-  white-space: nowrap;
+  border-radius: 0;
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  text-transform: uppercase;
   animation: slideDown 0.3s ease-out;
 }
 
 .actionFold {
-  background-color: var(--danger);
+  background-color: var(--neon-red);
   color: #fff;
+  border: 2px solid var(--neon-red);
 }
 
 .actionCheck {
-  background-color: var(--info);
+  background-color: var(--neon-blue);
   color: #fff;
+  border: 2px solid var(--neon-blue);
 }
 
 .actionCall {
-  background-color: var(--info);
-  color: #fff;
+  background-color: var(--neon-cyan);
+  color: var(--bg-deep);
+  border: 2px solid var(--neon-cyan);
 }
 
 .actionRaise {
-  background-color: var(--gold-primary);
-  color: var(--bg-primary);
+  background-color: var(--neon-magenta);
+  color: #fff;
+  border: 2px solid var(--neon-magenta);
 }
 
 .actionAllIn {
-  background-color: var(--warning);
-  color: #000;
+  background-color: var(--neon-orange);
+  color: var(--bg-deep);
+  border: 2px solid var(--neon-orange);
+  box-shadow: 0 0 8px var(--neon-orange);
 }
 
+/* Active indicator - pixel border */
 .activeIndicator {
   position: absolute;
-  inset: -4px;
-  border: 2px solid var(--gold-primary);
-  border-radius: var(--radius-lg);
+  inset: -6px;
+  border: 2px solid var(--neon-lime);
+  border-radius: 0;
   animation: pulse 1.5s ease-in-out infinite;
   pointer-events: none;
 }
 
 @keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes pulse {
-  0%, 100% {
-    box-shadow: 0 0 0 0 var(--gold-glow);
-  }
-  50% {
-    box-shadow: 0 0 0 6px rgba(255, 215, 0, 0);
-  }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 255, 0, 0); }
+  50% { box-shadow: 0 0 0 8px rgba(0, 255, 0, 0.3); }
 }
 
 /* Player cards display */
@@ -166,14 +171,8 @@
 }
 
 @keyframes cardSlideIn {
-  0% {
-    opacity: 0;
-    transform: translateY(-20px) rotate(-15deg);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) rotate(0deg);
-  }
+  0% { opacity: 0; transform: translateY(-20px) rotate(-15deg); }
+  100% { opacity: 1; transform: translateY(0) rotate(0deg); }
 }
 
 /* Bet display */
@@ -182,8 +181,8 @@
   flex-direction: column;
   align-items: center;
   padding: var(--space-1) var(--space-2);
-  background-color: rgba(255, 215, 0, 0.2);
-  border-radius: var(--radius-sm);
+  background-color: rgba(0, 255, 255, 0.1);
+  border: 2px solid var(--neon-cyan);
   margin-top: var(--space-1);
 }
 
@@ -192,29 +191,77 @@
 }
 
 @keyframes betPopIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.5);
-  }
-  50% {
-    transform: scale(1.2);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+  0% { opacity: 0; transform: scale(0.5); }
+  50% { transform: scale(1.2); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
 .betLabel {
-  font-size: var(--font-size-xs);
+  font-family: var(--font-pixel);
+  font-size: 8px;
   color: var(--text-muted);
 }
 
 .betValue {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-bold);
-  color: var(--gold-primary);
-  font-family: 'Monaco', monospace;
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  color: var(--neon-cyan);
+}
+
+/* Winner celebration */
+.container.winner {
+  animation: winnerHighlight 1s ease-out forwards;
+  border-color: var(--neon-lime);
+  background-color: rgba(0, 255, 0, 0.2);
+}
+
+@keyframes winnerHighlight {
+  0% { transform: scale(1); box-shadow: 0 0 0 rgba(0, 255, 0, 0); }
+  30% { transform: scale(1.1); box-shadow: 0 0 20px var(--neon-lime); }
+  50% { transform: scale(1.05); box-shadow: 0 0 30px var(--neon-lime); }
+  100% { transform: scale(1.08); box-shadow: 0 0 25px var(--neon-lime); }
+}
+
+/* Eliminated player */
+.container.eliminated {
+  animation: eliminatedFade 0.5s ease-out forwards;
+  opacity: 0.4;
+  filter: grayscale(80%);
+}
+
+@keyframes eliminatedFade {
+  0% { opacity: 1; filter: grayscale(0%); }
+  100% { opacity: 0.4; filter: grayscale(80%); }
+}
+
+/* Thinking animation */
+.container.thinking::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border: 2px solid transparent;
+  border-top-color: var(--neon-lime);
+  animation: thinkingSpinner 1s linear infinite;
+}
+
+@keyframes thinkingSpinner {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Winner trophy */
+.winnerTrophy {
+  position: absolute;
+  top: -20px;
+  font-size: 20px;
+  animation: trophyPopIn 0.5s ease-out forwards;
+  z-index: 25;
+}
+
+@keyframes trophyPopIn {
+  0% { opacity: 0; transform: translateY(-30px) scale(0); }
+  60% { opacity: 1; transform: translateY(-5px) scale(1.3); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 @media (max-width: 768px) {
@@ -224,18 +271,18 @@
   }
 
   .name {
-    font-size: var(--font-size-xs);
+    font-size: 8px;
     max-width: 80px;
   }
 
   .chips {
-    font-size: var(--font-size-xs);
+    font-size: 8px;
   }
 
   .dealerButton {
     width: 24px;
     height: 24px;
-    font-size: var(--font-size-xs);
+    font-size: 8px;
   }
 
   .playerCards {
@@ -247,248 +294,6 @@
   }
 
   .betValue {
-    font-size: var(--font-size-xs);
-  }
-}
-
-/* V3 Enhanced Bet and Winner Animations */
-
-/* Chip flying from player position to center pot */
-.betChipFly {
-  animation: betChipFlyToPot 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-@keyframes betChipFlyToPot {
-  0% {
-    opacity: 0;
-    transform: translate(var(--fly-x, 0), 0) scale(0.5);
-  }
-  25% {
-    opacity: 1;
-    transform: translate(calc(var(--fly-x, 0) * 0.7), -20px) scale(1.2);
-  }
-  50% {
-    transform: translate(calc(var(--fly-x, 0) * 0.3), -30px) scale(1.1);
-  }
-  75% {
-    transform: translate(0, -10px) scale(1.05);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(0, 0) scale(0);
-  }
-}
-
-/* Winner celebration effects */
-.container.winner {
-  animation: winnerHighlight 1s ease-out forwards;
-  border-color: var(--gold-primary);
-  background-color: rgba(255, 215, 0, 0.2);
-}
-
-@keyframes winnerHighlight {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 0 rgba(255, 215, 0, 0);
-  }
-  30% {
-    transform: scale(1.1);
-    box-shadow: 0 0 20px var(--gold-glow);
-  }
-  50% {
-    transform: scale(1.05);
-    box-shadow: 0 0 30px var(--gold-glow), 0 0 50px rgba(255, 215, 0, 0.4);
-  }
-  100% {
-    transform: scale(1.08);
-    box-shadow: 0 0 25px var(--gold-glow);
-  }
-}
-
-/* Pot chips flying to winner */
-.potCollect {
-  animation: potCollectToPlayer 0.9s ease-in forwards;
-}
-
-@keyframes potCollectToPlayer {
-  0% {
-    opacity: 1;
-    transform: translate(0, 0) scale(1);
-  }
-  30% {
-    opacity: 0.8;
-    transform: translate(calc(var(--collect-x, 0) * 0.3), calc(var(--collect-y, 50px) * 0.3)) scale(0.9);
-  }
-  60% {
-    opacity: 0.5;
-    transform: translate(calc(var(--collect-x, 0) * 0.6), calc(var(--collect-y, 50px) * 0.6)) scale(0.7);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(var(--collect-x, 0), var(--collect-y, 50px)) scale(0.3);
-  }
-}
-
-/* Eliminated player animation */
-.container.eliminated {
-  animation: eliminatedFade 0.5s ease-out forwards;
-  opacity: 0.5;
-  filter: grayscale(50%);
-}
-
-@keyframes eliminatedFade {
-  0% {
-    opacity: 1;
-    filter: grayscale(0%);
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.7;
-    filter: grayscale(30%);
-    transform: scale(0.95);
-  }
-  100% {
-    opacity: 0.5;
-    filter: grayscale(50%);
-    transform: scale(0.9);
-  }
-}
-
-/* Thinking/waiting animation for active player */
-.container.thinking::after {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border: 2px solid transparent;
-  border-top-color: var(--gold-primary);
-  border-radius: var(--radius-lg);
-  animation: thinkingSpinner 1s linear infinite;
-}
-
-@keyframes thinkingSpinner {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* Chip count change animation */
-.chipsChange {
-  animation: chipsChangePop 0.3s ease-out;
-}
-
-@keyframes chipsChangePop {
-  0% {
-    transform: scale(1);
-    color: var(--gold-primary);
-  }
-  50% {
-    transform: scale(1.3);
-    color: var(--success);
-  }
-  100% {
-    transform: scale(1);
-    color: var(--gold-primary);
-  }
-}
-
-/* Chips decrease animation */
-.chipsDecrease {
-  animation: chipsDecreasePop 0.3s ease-out;
-}
-
-@keyframes chipsDecreasePop {
-  0% {
-    transform: scale(1);
-    color: var(--gold-primary);
-  }
-  50% {
-    transform: scale(0.8);
-    color: var(--danger);
-  }
-  100% {
-    transform: scale(1);
-    color: var(--gold-primary);
-  }
-}
-
-/* Winner trophy animation */
-.winnerTrophy {
-  position: absolute;
-  top: -20px;
-  font-size: 20px;
-  animation: trophyPopIn 0.5s ease-out forwards;
-  z-index: 25;
-}
-
-@keyframes trophyPopIn {
-  0% {
-    opacity: 0;
-    transform: translateY(-30px) scale(0);
-  }
-  60% {
-    opacity: 1;
-    transform: translateY(-5px) scale(1.3);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* Card winner wrapper */
-.cardWinnerWrapper {
-  animation: cardWinnerPulse 0.6s ease-out forwards;
-}
-
-@keyframes cardWinnerPulse {
-  0% {
-    transform: scale(1);
-  }
-  30% {
-    transform: scale(1.15);
-  }
-  100% {
-    transform: scale(1.08);
-    filter: drop-shadow(0 0 8px var(--gold-glow));
-  }
-}
-
-/* Bet chips animation container */
-.betChipsAnimation {
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 2px;
-}
-
-/* Individual flying bet chip */
-.betChipFly {
-  font-size: 10px;
-  animation: betChipFlyToPot 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-@keyframes betChipFlyToPot {
-  0% {
-    opacity: 0;
-    transform: translate(var(--fly-x, 0), 0) scale(0.5);
-  }
-  25% {
-    opacity: 1;
-    transform: translate(calc(var(--fly-x, 0) * 0.7), -20px) scale(1.2);
-  }
-  50% {
-    transform: translate(calc(var(--fly-x, 0) * 0.3), -30px) scale(1.1);
-  }
-  75% {
-    transform: translate(0, -10px) scale(1.05);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(0, 0) scale(0);
+    font-size: 8px;
   }
 }

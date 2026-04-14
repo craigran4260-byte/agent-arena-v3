@@ -1,11 +1,29 @@
+/* Arcade Header Styles */
+
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-4);
   padding: var(--space-4);
-  border-bottom: 1px solid var(--border-subtle);
-  background-color: var(--bg-card);
+  border-bottom: 4px solid var(--neon-cyan);
+  background-color: var(--bg-dark);
+  position: relative;
+}
+
+/* Scanline effect */
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.1) 2px,
+    rgba(0, 0, 0, 0.1) 4px
+  );
+  pointer-events: none;
 }
 
 .leftSection {
@@ -22,13 +40,16 @@
 }
 
 .title {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--text-primary);
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-lg);
+  color: var(--neon-cyan);
+  text-shadow: 0 0 4px var(--neon-cyan);
   margin: 0;
+  text-transform: uppercase;
 }
 
 .subtitle {
+  font-family: var(--font-mono);
   font-size: var(--font-size-sm);
   color: var(--text-secondary);
   margin: var(--space-1) 0 0;
@@ -53,7 +74,7 @@
   }
 
   .title {
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-base);
   }
 
   .actions {

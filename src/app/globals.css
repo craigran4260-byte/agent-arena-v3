@@ -1,7 +1,7 @@
 /* ===== IMPORT DESIGN TOKENS ===== */
 @import '../styles/tokens.css';
 
-/* ===== CSS RESET (Impeccable-compliant) ===== */
+/* ===== CSS RESET ===== */
 *,
 *::before,
 *::after {
@@ -18,11 +18,11 @@ html {
 }
 
 body {
-  font-family: var(--font-family);
+  font-family: var(--font-mono);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-normal);
   line-height: var(--line-height-normal);
-  background-color: var(--bg-primary);
+  background-color: var(--bg-deep);
   color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
@@ -30,25 +30,27 @@ body {
 
 /* ===== ELEMENTS ===== */
 a {
-  color: inherit;
+  color: var(--text-neon);
   text-decoration: none;
-  transition: color var(--transition-base);
+  transition: color var(--transition-fast);
 }
 
 a:hover {
-  color: var(--gold-primary);
+  color: var(--neon-magenta);
+  text-shadow: var(--shadow-neon-magenta);
 }
 
 button {
-  font-family: inherit;
+  font-family: var(--font-pixel);
   cursor: pointer;
 }
 
 input,
 textarea,
 select {
-  font-family: inherit;
-  color: inherit;
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+  background-color: var(--bg-card);
 }
 
 input::placeholder,
@@ -70,84 +72,181 @@ svg {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
+  background: var(--bg-dark);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--border-default);
-  border-radius: var(--radius-sm);
+  background: var(--border-pixel);
+  border-radius: var(--radius-none);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--border-strong);
+  background: var(--neon-cyan);
 }
 
 /* Firefox scrollbar */
 * {
-  scrollbar-color: var(--border-default) var(--bg-secondary);
+  scrollbar-color: var(--border-pixel) var(--bg-dark);
   scrollbar-width: thin;
 }
 
-/* ===== ANIMATIONS ===== */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
+/* ===== ARCADE ANIMATIONS ===== */
+
+/* Neon flicker - simulates arcade light */
+@keyframes neonFlicker {
+  0%, 100% {
     opacity: 1;
+    text-shadow: var(--shadow-neon-cyan);
+  }
+  50% {
+    opacity: 0.9;
+    text-shadow: 0 0 4px var(--neon-cyan);
   }
 }
 
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes shimmer {
+/* Pixel reveal - staggered reveal effect */
+@keyframes pixelReveal {
   0% {
-    background-position: -1000px 0;
+    opacity: 0;
+    transform: translateY(8px);
   }
   100% {
-    background-position: 1000px 0;
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@keyframes goldGlow {
-  0%, 100% {
-    box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+/* Arcade button press */
+@keyframes buttonPress {
+  0% {
+    transform: translateY(0);
   }
   50% {
-    box-shadow: 0 0 16px rgba(255, 215, 0, 0.5);
+    transform: translateY(4px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
 
-@keyframes pulse {
+/* Score counter animation */
+@keyframes scoreCount {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+    color: var(--neon-lime);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Screen flash - winner announcement */
+@keyframes screenFlash {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: rgba(0, 255, 255, 0.1);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+/* CRT scanline effect */
+@keyframes scanlineMove {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(4px);
+  }
+}
+
+/* Coin collect animation */
+@keyframes coinCollect {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(-20px) rotate(180deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-40px) rotate(360deg);
+  }
+}
+
+/* Glitch effect */
+@keyframes glitch {
+  0%, 100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(2px, -2px);
+  }
+  60% {
+    transform: translate(-1px, -1px);
+  }
+  80% {
+    transform: translate(1px, 1px);
+  }
+}
+
+/* Pulse glow */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 4px var(--neon-cyan);
+  }
+  50% {
+    box-shadow: 0 0 12px var(--neon-cyan), 0 0 24px var(--neon-cyan);
+  }
+}
+
+/* Winner celebration */
+@keyframes winnerFlash {
   0%, 100% {
     opacity: 1;
   }
+  25% {
+    opacity: 0.5;
+  }
   50% {
+    opacity: 1;
+  }
+  75% {
     opacity: 0.5;
   }
 }
 
 /* ===== PAGE TRANSITIONS ===== */
 .page-enter {
-  animation: fadeIn var(--transition-base) ease-in-out;
+  animation: pixelReveal var(--transition-base) ease-out;
+}
+
+/* ===== UTILITY CLASSES ===== */
+.neon-text {
+  color: var(--neon-cyan);
+  text-shadow: var(--shadow-neon-cyan);
+}
+
+.neon-text-magenta {
+  color: var(--neon-magenta);
+  text-shadow: var(--shadow-neon-magenta);
+}
+
+.pixel-font {
+  font-family: var(--font-pixel);
+}
+
+.arcade-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
 }

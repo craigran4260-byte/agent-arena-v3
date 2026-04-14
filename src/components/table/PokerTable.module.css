@@ -1,3 +1,5 @@
+/* Arcade Poker Table Styles */
+
 .container {
   display: flex;
   align-items: center;
@@ -17,14 +19,67 @@
   position: relative;
   width: 100%;
   height: 100%;
-  border: 3px solid var(--border-gold);
+  border: 4px solid var(--neon-cyan);
   border-radius: 50% / 35%;
-  background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
+  background: linear-gradient(135deg, var(--bg-purple) 0%, var(--bg-dark) 100%);
   box-shadow:
-    0 0 30px var(--gold-glow),
-    inset 0 0 30px rgba(0, 0, 0, 0.3);
+    var(--shadow-neon-cyan),
+    inset 0 0 40px rgba(0, 255, 255, 0.1);
 }
 
+/* CRT scanline effect */
+.table::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.12) 2px,
+    rgba(0, 0, 0, 0.12) 4px
+  );
+  pointer-events: none;
+  z-index: 10;
+  animation: scanlineFlicker 0.05s infinite;
+}
+
+@keyframes scanlineFlicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.98; }
+}
+
+/* Delay indicator for spectator mode */
+.delayIndicator {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-2);
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 2px solid var(--neon-orange);
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  color: var(--neon-orange);
+  z-index: 20;
+  text-transform: uppercase;
+}
+
+.delayClock {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  animation: delayClockPulse 1s ease-in-out infinite;
+}
+
+@keyframes delayClockPulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* Pot display - arcade scoreboard style */
 .potDisplay {
   position: absolute;
   top: 50%;
@@ -35,20 +90,21 @@
 }
 
 .potLabel {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-  font-weight: var(--font-weight-semibold);
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  color: var(--neon-cyan);
+  text-transform: uppercase;
   margin-bottom: var(--space-1);
 }
 
 .potValue {
+  font-family: var(--font-pixel);
   font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--gold-primary);
-  font-family: 'Monaco', monospace;
+  color: var(--neon-lime);
+  text-shadow: 0 0 8px var(--neon-lime);
 }
 
-/* Chip pile at pot */
+/* Chip pile at pot - pixel chip style */
 .chipPile {
   display: flex;
   flex-wrap: wrap;
@@ -61,44 +117,52 @@
 .chip {
   width: 24px;
   height: 24px;
-  border-radius: 50%;
+  border-radius: 0;  /* Square pixel chips */
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
-  font-weight: var(--font-weight-bold);
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  border: 2px solid;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+/* Pixel chip colors */
 .chip.gold {
-  background: linear-gradient(135deg, #ffd700, #ffb300);
+  background: linear-gradient(135deg, #ffd700, #ffaa00);
   color: #000;
-  border: 2px solid #b8860b;
+  border-color: #b8860b;
 }
 
 .chip.red {
-  background: linear-gradient(135deg, #ef4444, #dc2626);
+  background: linear-gradient(135deg, #ff3333, #cc0000);
   color: #fff;
-  border: 2px solid #991b1b;
+  border-color: #990000;
 }
 
 .chip.blue {
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  background: linear-gradient(135deg, #3399ff, #0066cc);
   color: #fff;
-  border: 2px solid #1d4ed8;
+  border-color: #004499;
 }
 
 .chip.green {
-  background: linear-gradient(135deg, #22c55e, #16a34a);
-  color: #fff;
-  border: 2px solid #15803d;
+  background: linear-gradient(135deg, #33ff33, #00cc00);
+  color: #000;
+  border-color: #009900;
 }
 
+.chip.white {
+  background: linear-gradient(135deg, #ffffff, #cccccc);
+  color: #000;
+  border-color: #999999;
+}
+
+/* Chip animation */
 .chipMoving {
   animation: chipMove 0.5s ease-out forwards;
 }
 
-/* Chip movement from player to pot */
 @keyframes chipMove {
   0% {
     opacity: 0;
@@ -114,7 +178,7 @@
   }
 }
 
-/* Chip stack animation for bets */
+/* Bet chips animation */
 .betChips {
   position: absolute;
   display: flex;
@@ -137,7 +201,7 @@
   }
 }
 
-/* Player positions around the table (9 seats) */
+/* Player positions around the table */
 .playerSlot {
   position: absolute;
   width: 120px;
@@ -147,15 +211,13 @@
   justify-content: center;
 }
 
-/* Seat positions - arranged in ellipse around table */
-/* Dealer Button Position - Bottom Center */
+/* Seat positions */
 .seat1 {
   bottom: 8%;
   left: 50%;
   transform: translateX(-50%);
 }
 
-/* Seats 2 & 9 - Lower corners */
 .seat2 {
   bottom: 18%;
   right: 12%;
@@ -166,7 +228,6 @@
   left: 12%;
 }
 
-/* Seats 3 & 8 - Side positions */
 .seat3 {
   right: 6%;
   top: 38%;
@@ -179,7 +240,6 @@
   transform: translateY(-50%);
 }
 
-/* Seats 4 & 7 - Upper side positions */
 .seat4 {
   right: 12%;
   top: 20%;
@@ -190,7 +250,6 @@
   top: 20%;
 }
 
-/* Seats 5 & 6 - Top positions */
 .seat5 {
   top: 8%;
   right: 25%;
@@ -201,116 +260,27 @@
   left: 25%;
 }
 
+/* Empty slot - pixel border */
 .emptySlot {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
-  border: 2px dashed var(--border-default);
-  border-radius: var(--radius-lg);
-  background-color: rgba(0, 0, 0, 0.2);
+  border: 2px dashed var(--border-pixel);
+  background-color: rgba(0, 0, 0, 0.3);
   color: var(--text-muted);
-  font-size: var(--font-size-sm);
   transition: all var(--transition-base);
 }
 
 .emptySlot:hover {
-  border-color: var(--gold-primary);
-  background-color: rgba(255, 215, 0, 0.05);
+  border-color: var(--neon-cyan);
+  background-color: rgba(0, 255, 255, 0.05);
 }
 
 .seatNumber {
-  font-weight: var(--font-weight-semibold);
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .container {
-    padding: var(--space-4);
-    min-height: 400px;
-  }
-
-  .tableWrapper {
-    max-width: 100%;
-  }
-
-  .playerSlot {
-    width: 80px;
-    height: 80px;
-  }
-
-  .potValue {
-    font-size: var(--font-size-lg);
-  }
-
-  /* Adjust seat positions for mobile */
-  .seat1 {
-    bottom: 5%;
-  }
-
-  .seat2 {
-    bottom: 15%;
-    right: 8%;
-  }
-
-  .seat9 {
-    bottom: 15%;
-    left: 8%;
-  }
-
-  .seat3 {
-    right: 3%;
-  }
-
-  .seat8 {
-    left: 3%;
-  }
-
-  .seat4 {
-    right: 8%;
-    top: 18%;
-  }
-
-  .seat7 {
-    left: 8%;
-    top: 18%;
-  }
-
-  .seat5 {
-    top: 5%;
-    right: 20%;
-  }
-
-  .seat6 {
-    top: 5%;
-    left: 20%;
-  }
-
-  .chipPile {
-    max-width: 100px;
-  }
-
-  .chip {
-    width: 18px;
-    height: 18px;
-    font-size: 8px;
-  }
-
-  .communityCards {
-    gap: var(--space-1);
-    max-width: 180px;
-  }
-
-  .cardSlot {
-    width: 40px;
-    height: 56px;
-  }
-
-  .roundIndicator {
-    font-size: var(--font-size-xs);
-    padding: var(--space-1) var(--space-2);
-  }
+  font-family: var(--font-pixel);
+  font-size: 10px;
 }
 
 /* Community cards display */
@@ -345,32 +315,23 @@
   }
 }
 
-/* Round indicator */
+/* Round indicator - arcade style */
 .roundIndicator {
   position: absolute;
   bottom: 40%;
   left: 50%;
   transform: translateX(-50%);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-bold);
-  color: var(--gold-primary);
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  color: var(--neon-magenta);
   background-color: rgba(0, 0, 0, 0.5);
   padding: var(--space-2) var(--space-3);
-  border-radius: var(--radius-sm);
+  border: 2px solid var(--neon-magenta);
   text-transform: uppercase;
   letter-spacing: 2px;
 }
 
-/* White chip */
-.chip.white {
-  background: linear-gradient(135deg, #f5f5f5, #d4d4d4);
-  color: #000;
-  border: 2px solid #a3a3a3;
-}
-
-/* V3 Enhanced Chip Animations */
-
-/* Chip flying from player to pot center */
+/* Chip fly animation */
 .chipFlyIn {
   animation: chipFlyToPot 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   opacity: 0;
@@ -395,70 +356,6 @@
   }
 }
 
-/* Chip bouncing when landing in pot */
-.chipBounce {
-  animation: chipBounceLand 0.4s ease-out forwards;
-}
-
-@keyframes chipBounceLand {
-  0% {
-    transform: translateY(0) scale(1);
-  }
-  30% {
-    transform: translateY(-8px) scale(1.05);
-  }
-  50% {
-    transform: translateY(4px) scale(0.98);
-  }
-  70% {
-    transform: translateY(-2px) scale(1.02);
-  }
-  100% {
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* Pot collection animation - chips fly to winner */
-.chipCollect {
-  animation: chipCollectToWinner 0.8s ease-in forwards;
-}
-
-@keyframes chipCollectToWinner {
-  0% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-  30% {
-    opacity: 0.8;
-    transform: translateY(-20px) scale(0.9);
-  }
-  60% {
-    opacity: 0.5;
-    transform: translateY(var(--winner-y, -40px)) translateX(var(--winner-x, 0)) scale(0.7);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(var(--winner-y, -60px)) translateX(var(--winner-x, 0)) scale(0.3);
-  }
-}
-
-/* Chip pile overflow animation */
-.chipOverflow {
-  animation: chipOverflow 0.3s ease-out;
-}
-
-@keyframes chipOverflow {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
 /* Pot glow effect when large */
 .potLarge {
   animation: potGlowPulse 2s ease-in-out infinite;
@@ -466,14 +363,14 @@
 
 @keyframes potGlowPulse {
   0%, 100% {
-    box-shadow: 0 0 10px var(--gold-glow);
+    box-shadow: 0 0 8px rgba(0, 255, 0, 0.3);
   }
   50% {
-    box-shadow: 0 0 25px var(--gold-glow), 0 0 40px rgba(255, 215, 0, 0.3);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5), 0 0 40px rgba(0, 255, 0, 0.2);
   }
 }
 
-/* Winner celebration - confetti-like effect */
+/* Winner celebration */
 .winnerCelebration {
   animation: winnerConfetti 1s ease-out forwards;
 }
@@ -499,34 +396,53 @@
   }
 }
 
-/* Delay indicator for spectator mode */
-.delayIndicator {
-  position: absolute;
-  top: var(--space-2);
-  right: var(--space-2);
-  display: flex;
-  align-items: center;
-  gap: var(--space-1);
-  padding: var(--space-1) var(--space-2);
-  background-color: rgba(0, 0, 0, 0.6);
-  border-radius: var(--radius-sm);
-  font-size: var(--font-size-xs);
-  color: var(--text-secondary);
-  z-index: 20;
-}
-
-.delayClock {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  animation: delayClockPulse 1s ease-in-out infinite;
-}
-
-@keyframes delayClockPulse {
-  0%, 100% {
-    opacity: 0.7;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--space-4);
+    min-height: 400px;
   }
-  50% {
-    opacity: 1;
+
+  .tableWrapper {
+    max-width: 100%;
+  }
+
+  .playerSlot {
+    width: 80px;
+    height: 80px;
+  }
+
+  .potValue {
+    font-size: var(--font-size-lg);
+  }
+
+  .seat1 { bottom: 5%; }
+  .seat2 { bottom: 15%; right: 8%; }
+  .seat9 { bottom: 15%; left: 8%; }
+  .seat3 { right: 3%; }
+  .seat8 { left: 3%; }
+  .seat4 { right: 8%; top: 18%; }
+  .seat7 { left: 8%; top: 18%; }
+  .seat5 { top: 5%; right: 20%; }
+  .seat6 { top: 5%; left: 20%; }
+
+  .chipPile {
+    max-width: 100px;
+  }
+
+  .chip {
+    width: 18px;
+    height: 18px;
+    font-size: 6px;
+  }
+
+  .communityCards {
+    gap: var(--space-1);
+    max-width: 180px;
+  }
+
+  .roundIndicator {
+    font-size: 8px;
+    padding: var(--space-1) var(--space-2);
   }
 }

@@ -1,19 +1,30 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
+import { Press_Start_2P, Space_Mono } from 'next/font/google';
 import './globals.css';
 import { SessionProvider } from '@/components/providers/SessionProvider';
 import { ToastProvider } from '@/components/ui';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 
-const inter = Inter({
+// Pixel font for headlines and arcade text
+const pressStart2P = Press_Start_2P({
+  weight: '400',
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-pixel',
+  display: 'swap',
+});
+
+// Monospace font for body text and data
+const spaceMono = Space_Mono({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  variable: '--font-mono',
   display: 'swap',
 });
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
+  themeColor: '#0a0a2e',  // Midnight blue
 };
 
 export const metadata: Metadata = {
@@ -30,7 +41,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${pressStart2P.variable} ${spaceMono.variable}`}>
       <body>
         <ErrorBoundary>
           <SessionProvider>
