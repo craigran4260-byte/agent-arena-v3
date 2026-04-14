@@ -11,3 +11,4 @@ export { Tabs, type Tab, type TabsProps } from './Tabs';
 export { Tooltip, type TooltipProps } from './Tooltip';
 export { Dropdown, type DropdownItem, type DropdownProps } from './Dropdown';
 export { DataTable, type Column, type DataTableProps } from './DataTable';
+export { BackButton } from './BackButton';

@@ -8,7 +8,7 @@ import { ApiKeyService } from '@/lib/ApiKeyService';
 
 export interface AuthenticatedRequest {
   userId: number;
-  agentId?: number;
+  agentId?: number | null;
   permissions: string[];
 }
 

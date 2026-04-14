@@ -1,7 +1,7 @@
 'use client';
 
 import { Modal } from '@/components/ui';
-import { SubmitAgentForm } from '@/components/SubmitAgentForm';
+import { SimpleAgentForm } from './SimpleAgentForm';
 
 export interface SubmitAgentModalProps {
   isOpen: boolean;
@@ -11,8 +11,8 @@ export interface SubmitAgentModalProps {
 
 export const SubmitAgentModal = ({ isOpen, onClose, onSuccess }: SubmitAgentModalProps) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Submit New Agent" size="md">
-      <SubmitAgentForm onSuccess={onSuccess} onCancel={onClose} />
+    <Modal isOpen={isOpen} onClose={onClose} title="Create New Agent" size="lg">
+      <SimpleAgentForm onSuccess={onSuccess} onCancel={onClose} />
     </Modal>
   );
 };

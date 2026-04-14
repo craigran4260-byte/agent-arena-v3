@@ -1,6 +1,6 @@
 import { IconProps } from './LogoIcon';
 
-export const KeyIcon = ({ size = 32, className = '', color = 'currentColor' }: IconProps) => (
+export const TrashIcon = ({ size = 24, className = '', color = 'currentColor' }: IconProps) => (
   <svg
     width={size}
     height={size}
@@ -10,13 +10,12 @@ export const KeyIcon = ({ size = 32, className = '', color = 'currentColor' }: I
     className={className}
   >
     <path
-      d="M12.65 10.65C11.85 8.55 9.75 7 7.25 7C4.35 7 2 9.35 2 12.25C2 15.15 4.35 17.5 7.25 17.5C9.75 17.5 11.85 15.95 12.65 13.85H15V16.5H17.5V13.85H19V16.5H21.5V13.85H22V10.65H12.65Z"
+      d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z"
       stroke={color}
-      strokeWidth="1.5"
+      strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      fill="none"
     />
-    <circle cx="7.25" cy="12.25" r="2.25" stroke={color} strokeWidth="1.5" fill="none" />
+    <path d="M10 11v6M14 11v6" stroke={color} strokeWidth="2" strokeLinecap="round" />
   </svg>
 );

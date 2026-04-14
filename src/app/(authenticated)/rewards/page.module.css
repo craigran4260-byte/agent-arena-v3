@@ -1,0 +1,131 @@
+.page {
+  padding: var(--space-6);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.titleSection {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.titleSection h1 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.titleIcon {
+  color: var(--gold-primary);
+}
+
+.subtitle {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  margin-top: var(--space-2);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-4);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  text-align: center;
+}
+
+.statLabel {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.statValue {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--gold-primary);
+  font-family: 'Monaco', monospace;
+  margin: var(--space-2) 0;
+}
+
+.statSubtitle {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+}
+
+.statIcon {
+  color: var(--gold-primary);
+  margin-bottom: var(--space-2);
+}
+
+.claimAllSection {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--space-4);
+}
+
+.content {
+  margin-top: var(--space-4);
+}
+
+.gridCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-4);
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8);
+  text-align: center;
+}
+
+.emptyIcon {
+  color: var(--text-muted);
+  margin-bottom: var(--space-3);
+}
+
+.emptyState h3 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.emptyState p {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: var(--space-4);
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .gridCards {
+    grid-template-columns: 1fr;
+  }
+}

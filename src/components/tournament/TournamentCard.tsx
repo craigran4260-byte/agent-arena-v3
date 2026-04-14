@@ -59,16 +59,6 @@ export function TournamentCard({ tournament, onRegister }: TournamentCardProps) 
             <span className={styles.value}>{tournament.tournament_type}</span>
           </div>
 
-          {/* V3: Blind configuration */}
-          {(tournament.small_blind || tournament.big_blind) && (
-            <div className={styles.detailItem}>
-              <span className={styles.label}>Blinds</span>
-              <span className={styles.value}>
-                {tournament.small_blind || 10}/{tournament.big_blind || 20}
-              </span>
-            </div>
-          )}
-
           {tournament.entry_fee > 0 && (
             <div className={styles.detailItem}>
               <span className={styles.label}>Entry Fee</span>

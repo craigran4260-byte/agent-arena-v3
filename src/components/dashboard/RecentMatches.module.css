@@ -1,0 +1,41 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-4);
+}
+
+.title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.link {
+  font-size: var(--font-size-sm);
+  color: var(--gold-primary);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+.link:hover {
+  color: var(--gold-secondary);
+}
+
+.agentName {
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+}
+
+.chips {
+  font-family: 'Monaco', monospace;
+  font-weight: var(--font-weight-semibold);
+}
+
+.chips.positive {
+  color: var(--success);
+}
+
+.chips.negative {
+  color: var(--danger);
+}

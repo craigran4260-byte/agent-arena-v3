@@ -1,37 +1,42 @@
 'use client';
 
 import { Avatar } from '@/components/ui';
-import { ChipIcon, ShieldIcon } from '@/components/icons';
+import { ShieldIcon } from '@/components/icons';
+import { PlayingCard } from './PlayingCard';
 import styles from './PlayerPosition.module.css';
 
 interface PlayerPositionProps {
   agentName: string;
   chips: number;
-  currentBet?: number; // V3: Current round bet amount
   action?: 'fold' | 'check' | 'call' | 'raise' | 'all-in';
   isActive?: boolean;
   isDealerButton?: boolean;
   isSmallBlind?: boolean;
   isBigBlind?: boolean;
-  positionName?: string; // V3: Poker position (BTN, SB, BB, UTG, etc.)
   avatarUrl?: string;
-  isFolded?: boolean;
-  isAllIn?: boolean;
+  currentBet?: number;
+  cards?: { suit: 'hearts' | 'diamonds' | 'clubs' | 'spades'; rank: '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | 'J' | 'Q' | 'K' | 'A' }[];
+  animateBet?: boolean;
+  isWinner?: boolean;
+  isEliminated?: boolean;
+  flyDirection?: number;
 }
 
 export const PlayerPosition = ({
   agentName,
   chips,
-  currentBet = 0,
   action,
   isActive,
   isDealerButton,
   isSmallBlind,
   isBigBlind,
-  positionName,
   avatarUrl,
-  isFolded,
-  isAllIn,
+  currentBet = 0,
+  cards,
+  animateBet = false,
+  isWinner = false,
+  isEliminated = false,
+  flyDirection = 0,
 }: PlayerPositionProps) => {
   const getActionColor = () => {
     switch (action) {
@@ -50,34 +55,26 @@ export const PlayerPosition = ({
     }
   };
 
-  // Determine position badge to show
-  const getPositionBadge = () => {
-    // Show explicit position name first (V3)
-    if (positionName) {
-      return positionName;
-    }
-    // Fall back to blind/dealer indicators
-    if (isDealerButton) return 'BTN';
-    if (isSmallBlind) return 'SB';
-    if (isBigBlind) return 'BB';
-    return null;
+  // Determine container class based on state
+  const getContainerClass = () => {
+    const classes = [styles.container];
+    if (isActive) classes.push(styles.active);
+    if (isWinner) classes.push(styles.winner);
+    if (isEliminated) classes.push(styles.eliminated);
+    return classes.join(' ');
   };
 
-  const positionBadge = getPositionBadge();
-
   return (
-    <div className={`${styles.container} ${isActive ? styles.active : ''} ${isFolded ? styles.folded : ''}`}>
-      {/* Position Badge (BTN, SB, BB, UTG, etc.) */}
-      {positionBadge && (
-        <div className={`${styles.positionBadge} ${isDealerButton ? styles.button : ''} ${isSmallBlind ? styles.smallBlind : ''} ${isBigBlind ? styles.bigBlind : ''}`}>
-          {positionBadge}
-        </div>
+    <div className={getContainerClass()}>
+      {/* Dealer Button */}
+      {isDealerButton && (
+        <div className={styles.dealerButton}>D</div>
       )}
 
-      {/* Dealer Button Chip */}
-      {isDealerButton && (
-        <div className={styles.dealerChip}>
-          D
+      {/* Blind Indicator */}
+      {(isSmallBlind || isBigBlind) && (
+        <div className={`${styles.blindBadge} ${isBigBlind ? styles.bigBlind : styles.smallBlind}`}>
+          {isBigBlind ? 'BB' : 'SB'}
         </div>
       )}
 
@@ -87,25 +84,70 @@ export const PlayerPosition = ({
           name={agentName}
           src={avatarUrl}
           size="md"
-          className={isFolded ? styles.avatarFolded : ''}
         />
         <div className={styles.nameSection}>
           <div className={styles.name}>{agentName}</div>
-          <div className={styles.chipsRow}>
-            <ChipIcon size={14} />
-            <span className={styles.chips}>{chips.toLocaleString()}</span>
+          <div
+            className={`${styles.chips} ${isWinner ? styles.chipsChange : ''} ${isEliminated ? styles.chipsDecrease : ''}`}
+          >
+            {chips.toLocaleString()}
           </div>
-          {/* V3: Current bet amount */}
-          {currentBet > 0 && !isFolded && (
-            <div className={styles.currentBet}>
-              Bet: {currentBet.toLocaleString()}
-            </div>
-          )}
         </div>
       </div>
 
+      {/* Player cards */}
+      {cards && cards.length > 0 && (
+        <div className={styles.playerCards}>
+          {cards.map((card, index) => (
+            <div
+              key={index}
+              className={`${styles.cardWrapper} ${isWinner ? styles.cardWinnerWrapper : ''}`}
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
+              <PlayingCard
+                suit={card.suit}
+                rank={card.rank}
+                size="sm"
+                animate={true}
+                animationType={isWinner ? 'reveal' : 'deal'}
+              />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Current Bet Display with fly animation */}
+      {currentBet > 0 && (
+        <div
+          className={`${styles.betDisplay} ${animateBet ? styles.betAnimating : ''}`}
+          style={{
+            ...(animateBet && { '--fly-x': `${flyDirection}px` } as React.CSSProperties),
+          }}
+        >
+          <span className={styles.betLabel}>Bet</span>
+          <span className={styles.betValue}>{currentBet.toLocaleString()}</span>
+          {/* Animated bet chips */}
+          {animateBet && (
+            <div className={styles.betChipsAnimation}>
+              {[5, 10, 25].slice(0, Math.min(3, Math.ceil(currentBet / 100))).map((val, i) => (
+                <div
+                  key={i}
+                  className={styles.betChipFly}
+                  style={{
+                    '--fly-x': `${flyDirection}px`,
+                    animationDelay: `${i * 100}ms`,
+                  } as React.CSSProperties}
+                >
+                  💰
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Action Label */}
-      {action && !isFolded && (
+      {action && (
         <div className={`${styles.actionLabel} ${getActionColor()}`}>
           {action === 'all-in' ? (
             <>
@@ -118,23 +160,14 @@ export const PlayerPosition = ({
         </div>
       )}
 
-      {/* All-in indicator */}
-      {isAllIn && (
-        <div className={styles.allInBadge}>
-          ALL IN
-        </div>
-      )}
-
       {/* Active Indicator */}
-      {isActive && !isFolded && (
+      {isActive && !isWinner && (
         <div className={styles.activeIndicator} />
       )}
 
-      {/* Folded overlay */}
-      {isFolded && (
-        <div className={styles.foldedOverlay}>
-          FOLDED
-        </div>
+      {/* Winner Trophy */}
+      {isWinner && (
+        <div className={styles.winnerTrophy}>🏆</div>
       )}
     </div>
   );

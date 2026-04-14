@@ -3,6 +3,13 @@ import { authOptions } from './auth-config';
 import { Session } from 'next-auth';
 
 /**
+ * Get current user session (alias for getOptionalSession)
+ */
+export async function getSession(): Promise<Session | null> {
+  return getServerSession(authOptions);
+}
+
+/**
  * Get current user session (required)
  * Throws if not authenticated
  */

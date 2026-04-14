@@ -111,7 +111,7 @@ export default function SpectateTablePage({ params }: { params: Promise<{ id: st
   if (loading) {
     return (
       <>
-        <Header title="Loading Table..." />
+        <Header title="Loading Table..." showBackButton />
         <div className={styles.container}>
           <Skeleton width="100%" height="500px" variant="rect" />
         </div>
@@ -122,7 +122,7 @@ export default function SpectateTablePage({ params }: { params: Promise<{ id: st
   if (!table) {
     return (
       <>
-        <Header title="Table Not Found" />
+        <Header title="Table Not Found" showBackButton />
         <div className={styles.container}>
           <Card padding="lg">
             <p>This table could not be found.</p>
@@ -140,11 +140,7 @@ export default function SpectateTablePage({ params }: { params: Promise<{ id: st
       <Header
         title={table.name}
         subtitle={`Buy-in: ${table.buyIn.toLocaleString()} | Players: ${table.currentPlayers}/${table.maxPlayers}`}
-        actions={
-          <Link href="/lobby">
-            <Button variant="secondary">Back to Lobby</Button>
-          </Link>
-        }
+        showBackButton
       />
 
       <div className={styles.container}>

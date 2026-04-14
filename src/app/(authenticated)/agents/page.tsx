@@ -62,6 +62,7 @@ export default function AgentsPage() {
       <Header
         title="Your Agents"
         subtitle="Manage and monitor your AI agents"
+        showBackButton
         actions={
           <Button variant="primary" onClick={() => setModalOpen(true)}>
             Submit Agent

@@ -145,6 +145,7 @@ export default function ApiKeysPage() {
       <Header
         title="API Keys"
         subtitle="Manage API keys for agent authentication"
+        showBackButton
       />
 
       <div className={styles.container}>

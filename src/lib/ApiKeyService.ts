@@ -49,10 +49,10 @@ function generateKey(isTest: boolean = false): { fullKey: string; keyHash: strin
   const mode = isTest ? 'test' : 'live';
   const randomBytes = crypto.randomBytes(KEY_LENGTH).toString('hex').slice(0, KEY_LENGTH);
   const fullKey = `${KEY_PREFIX}${mode}_${randomBytes}`;
-  const keyHash = crypto.hash(HASH_ALGORITHM).update(fullKey).digest('hex');
+  const keyHash = crypto.createHash(HASH_ALGORITHM).update(fullKey).digest('hex');
   const displayPrefix = `${KEY_PREFIX}${mode}_${randomBytes.slice(0, 8)}...`;
 
-  return { fullKey, keyHash, displayPrefix };
+  return { fullKey, keyHash, keyPrefix: displayPrefix };
 }
 
 /**
@@ -70,7 +70,8 @@ function parsePermissions(permissionsStr: string): ApiKeyPermission[] {
   if (permissionsStr.startsWith('[')) {
     // PostgreSQL array format
     try {
-      return JSON.parse(permissionsStr.replace(/^\[|\]$/g, '').split(',').map(p => p.trim()));
+      const cleaned = permissionsStr.replace(/^\[|\]$/g, '');
+      return JSON.parse(`[${cleaned.split(',').map(p => `"${p.trim().replace(/"/g, '')}"`).join(',')}]`);
     } catch {
       return ['read'];
     }
@@ -84,7 +85,7 @@ export const ApiKeyService = {
    * Create a new API key
    */
   async create(options: CreateApiKeyOptions): Promise<{ key: ApiKey; fullKey: string }> {
-    const { fullKey, keyHash, displayPrefix } = generateKey();
+    const { fullKey, keyHash, keyPrefix } = generateKey();
 
     const permissions = options.permissions || ['read'];
     const expiresAt = options.expiresInDays
@@ -106,7 +107,7 @@ export const ApiKeyService = {
       options.userId,
       options.agentId || null,
       keyHash,
-      displayPrefix,
+      keyPrefix,
       options.name || null,
       permissionsStr,
       expiresAt?.toISOString() || null
@@ -116,7 +117,7 @@ export const ApiKeyService = {
       id: result.lastInsertRowid as number,
       userId: options.userId,
       agentId: options.agentId || null,
-      keyPrefix: displayPrefix,
+      keyPrefix: keyPrefix,
       name: options.name || null,
       permissions,
       lastUsedAt: null,

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Reward, RewardService } from '@/lib/RewardService';
 import { RewardCard } from '@/components/rewards/RewardCard';
-import { Button } from '@/components/ui/Button';
+import { Button, BackButton } from '@/components/ui';
 import { Tabs } from '@/components/ui/Tabs';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { TrophyIcon } from '@/components/icons/TrophyIcon';
@@ -89,6 +89,7 @@ export default function RewardsPage() {
     <div className={styles.page}>
       {/* Header */}
       <div className={styles.header}>
+        <BackButton />
         <div className={styles.titleSection}>
           <TrophyIcon size={32} className={styles.titleIcon} />
           <h1>Rewards</h1>

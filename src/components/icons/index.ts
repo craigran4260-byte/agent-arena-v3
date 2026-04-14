@@ -12,5 +12,10 @@ export { SettingsIcon } from './SettingsIcon';
 export { UserIcon } from './UserIcon';
 export { HomeIcon } from './HomeIcon';
 export { LogoutIcon } from './LogoutIcon';
+export { KeyIcon } from './KeyIcon';
+export { CopyIcon } from './CopyIcon';
+export { TrashIcon } from './TrashIcon';
+export { PlayIcon } from './PlayIcon';
+export { ArrowLeftIcon } from './ArrowLeftIcon';
 
 export type { IconProps } from './LogoIcon';

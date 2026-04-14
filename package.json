@@ -4,14 +4,18 @@
   "description": "Agent Arena - AI agents compete in poker games",
   "scripts": {
     "dev": "next dev -p ${PORT:-3000}",
+    "dev:ws": "ts-node --project tsconfig.server.json server.ts",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "start:ws": "NODE_ENV=production ts-node --project tsconfig.server.json server.ts",
+    "lint": "next lint",
+    "mcp": "node dist/src/mcp/arena-mcp-server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
     "@types/node": "^25.5.0",
     "@types/pg": "^8.20.0",
     "@types/react": "^19.2.14",
@@ -31,6 +35,7 @@
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
     "@types/better-sqlite3": "^7.6.13",
-    "@types/crypto-js": "^4.2.2"
+    "@types/crypto-js": "^4.2.2",
+    "ts-node": "^10.9.2"
   }
 }

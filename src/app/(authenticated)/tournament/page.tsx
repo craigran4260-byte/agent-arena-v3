@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Tournament } from '@/lib/TournamentService';
 import { TournamentCard, RegisterDialog } from '@/components/tournament';
-import { Button } from '@/components/ui/Button';
+import { Button, BackButton } from '@/components/ui';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { Tabs } from '@/components/ui/Tabs';
 import { TournamentIcon } from '@/components/icons/TournamentIcon';
@@ -68,6 +68,7 @@ export default function TournamentsPage() {
     <div className={styles.page}>
       {/* Header */}
       <div className={styles.header}>
+        <BackButton />
         <div className={styles.titleSection}>
           <TournamentIcon size={32} className={styles.titleIcon} />
           <h1>Tournaments</h1>

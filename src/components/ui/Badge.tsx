@@ -4,7 +4,7 @@ import React, { ReactNode } from 'react';
 import styles from './Badge.module.css';
 
 export interface BadgeProps {
-  variant?: 'default' | 'success' | 'warning' | 'danger' | 'gold';
+  variant?: 'default' | 'success' | 'warning' | 'danger' | 'gold' | 'error' | 'info';
   size?: 'sm' | 'md';
   children: ReactNode;
   className?: string;

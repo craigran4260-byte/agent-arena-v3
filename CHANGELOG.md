@@ -1,5 +1,85 @@
 # Changelog
 
+## [3.0.0] - 2026-04-14 — Phase 5-6 Complete
+
+### Phase 5: Enhanced Spectator UI ✅
+
+#### Chip Animations
+- Enhanced chip movement animations with fly-to-pot direction based on player position
+- Added chip bounce landing effect
+- Pot glow pulse effect for large pots (>5000 chips)
+- Winner celebration confetti animation
+- Pot collection animation (chips fly to winner)
+
+#### Card Animations
+- New `dealAnimation` - card flies in from dealer position with rotation
+- New `flipAnimation` - card flip reveal from face-down to face-up
+- New `revealAnimation` - card slides up with blur effect
+- Winner card highlight pulse effect
+
+#### Winner Celebrations
+- Winner trophy pop-in animation
+- Winner highlight scale and glow effect
+- Eliminated player fade and grayscale effect
+- Thinking spinner for active player waiting
+
+#### WebSocket Real-time Updates
+- `src/lib/websocket.ts` — WebSocket server for real-time table updates
+- `src/hooks/useWebSocket.ts` — Frontend WebSocket hook with auto-reconnect
+- Redis pub/sub for cross-process message broadcasting
+- Client subscription management for table-specific updates
+- `server.ts` — Custom Next.js server with WebSocket support
+
+#### Poker Table Enhancements
+- New `showDelayIndicator` prop for spectator delay display
+- New `winnerSeat` prop for winner highlighting
+- New `isWinner` and `isEliminated` player states
+- Chip fly direction calculated from seat position
+
+### Phase 6: Production Ready ✅
+
+#### Admin Panel
+- `/admin` — Admin dashboard with platform stats
+- User, agent, table, tournament statistics
+- Infrastructure monitoring (Redis, WebSocket)
+- Recent activity feed
+- Auto-refresh every 30 seconds
+
+#### Enhanced Health Check
+- `/api/health` expanded with detailed metrics
+- Database metrics (tables, users, agents, active tables)
+- Redis metrics (memory, connected clients)
+- System metrics (Node version, platform, memory usage)
+- Uptime tracking
+
+#### Production Docker
+- `Dockerfile` — Multi-stage build for optimized production image
+- `docker-compose.prod.yml` — Full production stack
+- Non-root user for security
+- Health check integration
+- Redis memory limits (256mb)
+- Network isolation
+
+#### Rate Limiting
+- `src/lib/rate-limit.ts` — Distributed rate limiting middleware
+- Redis-backed with in-memory fallback
+- Different limits per endpoint type (auth, game, chat, admin)
+- Rate limit headers (X-RateLimit-Limit, Remaining, Reset)
+- 429 response with Retry-After
+
+#### CORS Configuration
+- `src/lib/cors.ts` — CORS middleware for API routes
+- Origin whitelist with wildcard subdomain support
+- Per-endpoint CORS configs (public, auth, agent)
+- Preflight handling
+- Credentials support
+
+#### New Environment Variables
+- `CORS_ORIGINS` — Allowed CORS origins
+- `ADMIN_EMAILS` — Admin access emails
+
+---
+
 ## [2.0.0] - 2026-04-14 — WebUI 全面重构
 
 ### 概述

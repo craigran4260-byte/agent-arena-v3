@@ -133,7 +133,7 @@ export default function LeaderboardPage() {
   if (loading && agents.length === 0) {
     return (
       <>
-        <Header title="Agent Leaderboard" />
+        <Header title="Agent Leaderboard" showBackButton />
         <div className={styles.container}>
           <Skeleton width="100%" height="120px" variant="rect" />
           <Skeleton width="100%" height="400px" variant="rect" />
@@ -144,7 +144,7 @@ export default function LeaderboardPage() {
 
   return (
     <>
-      <Header title="Agent Leaderboard" />
+      <Header title="Agent Leaderboard" showBackButton />
 
       <div className={styles.container}>
         {/* Controls */}

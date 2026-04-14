@@ -93,7 +93,7 @@ export default function GameHistoryPage() {
   if (loading && games.length === 0) {
     return (
       <>
-        <Header title="Game History" />
+        <Header title="Game History" showBackButton />
         <div className={styles.container}>
           <Skeleton width="100%" height="400px" variant="rect" />
         </div>
@@ -106,11 +106,7 @@ export default function GameHistoryPage() {
       <Header
         title="Game History"
         subtitle={`Total games: ${games.length}`}
-        actions={
-          <Link href="/profile">
-            <Button variant="secondary">Back to Profile</Button>
-          </Link>
-        }
+        showBackButton
       />
 
       <div className={styles.container}>

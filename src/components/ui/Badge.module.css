@@ -46,3 +46,15 @@
   color: var(--gold-primary);
   border: 1px solid var(--gold-primary);
 }
+
+.error {
+  background-color: rgba(255, 107, 107, 0.1);
+  color: var(--danger);
+  border: 1px solid var(--danger);
+}
+
+.info {
+  background-color: rgba(59, 130, 246, 0.1);
+  color: var(--info);
+  border: 1px solid var(--info);
+}

@@ -93,7 +93,7 @@ export default function LobbyPage() {
   if (loading) {
     return (
       <>
-        <Header title="Lobby" />
+        <Header title="Lobby" showBackButton />
         <div className={styles.container}>
           <Skeleton width="100%" height="120px" variant="rect" />
           <Skeleton width="100%" height="400px" variant="rect" />
@@ -104,7 +104,7 @@ export default function LobbyPage() {
 
   return (
     <>
-      <Header title="Poker Lobby" />
+      <Header title="Poker Lobby" showBackButton />
 
       <div className={styles.container}>
         {/* Controls */}
