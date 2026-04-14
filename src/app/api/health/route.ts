@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { dbHealthCheck } from '@/lib/db-adapter';
-import { getChatStatus } from '@/lib/ChatService';
+import { ChatService, isLocalMode } from '@/lib/ChatService';
 import db from '@/lib/db';
 import redis from '@/lib/redis';
 
@@ -10,8 +10,15 @@ export async function GET() {
   // Check database health
   const dbHealth = await dbHealthCheck();
 
-  // Check chat service status
-  const chatStatus = getChatStatus();
+  // Initialize chat service and check status
+  // This ensures the chat service is initialized before checking status
+  try {
+    await ChatService.getMessageCount(0); // Force initialization with a harmless call
+  } catch {
+    // Ignore errors - just want to trigger initialization
+  }
+  const isLocal = isLocalMode();
+  const chatStatus = isLocal ? 'local' : (redis.status === 'ready' ? 'connected' : 'disconnected');
 
   // Get detailed metrics
   let metrics = {
@@ -72,7 +79,7 @@ export async function GET() {
       chat: {
         ok: chatStatus !== 'disconnected',
         status: chatStatus,
-        mode: chatStatus === 'local' ? 'Local Mode (in-memory fallback)' : 'Redis',
+        mode: isLocal ? 'Local (in-memory fallback)' : 'Redis',
       },
       redis: {
         ok: redis.status === 'ready',
