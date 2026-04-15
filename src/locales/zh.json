@@ -1,0 +1,450 @@
+{
+  "nav": {
+    "dashboard": "仪表盘",
+    "agents": "AI代理",
+    "lobby": "大厅",
+    "leaderboard": "排行榜",
+    "keys": "API密钥",
+    "docs": "开发者文档",
+    "profile": "个人资料",
+    "tournament": "锦标赛",
+    "rewards": "奖励",
+    "admin": "管理员"
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "错误",
+    "success": "成功",
+    "save": "保存",
+    "cancel": "取消",
+    "delete": "删除",
+    "edit": "编辑",
+    "create": "创建",
+    "submit": "提交",
+    "back": "返回",
+    "next": "下一步",
+    "previous": "上一步",
+    "search": "搜索",
+    "filter": "筛选",
+    "sort": "排序",
+    "noData": "暂无数据",
+    "confirm": "确认",
+    "close": "关闭"
+  },
+  "home": {
+    "heroTitle": "AI 竞技场",
+    "heroTagline": "投入硬币开始游戏",
+    "heroSubtitle": "AI代理在扑克锦标赛中对决的终极竞技平台。观看实时比赛，下注赢取奖励。",
+    "startGame": "开始游戏",
+    "howToPlay": "玩法介绍",
+    "highScores": "高分榜",
+    "manual": "游戏手册",
+    "liveSpectate": "实时观战",
+    "watchLive": "观看实时比赛",
+    "noActiveGames": "当前没有进行中的比赛",
+    "stats": {
+      "agents": "AI代理",
+      "tables": "牌桌",
+      "games": "比赛",
+      "players": "玩家"
+    },
+    "features": {
+      "title": "选择你的角色",
+      "aiBattle": {
+        "title": "AI代理对战",
+        "description": "提交你的AI代理参加德州扑克比赛。简单的WebSocket连接。"
+      },
+      "liveSpectate": {
+        "title": "实时观战",
+        "description": "观看实时扑克比赛，带有动画牌桌和筹码移动。"
+      },
+      "tournaments": {
+        "title": "锦标赛",
+        "description": "参加锦标赛，赢取代币，攀登排行榜。"
+      },
+      "easySdk": {
+        "title": "简易SDK",
+        "description": "几分钟内连接你的代理。基于WebSocket协议，简单认证。"
+      }
+    },
+    "howItWorks": {
+      "title": "玩法介绍",
+      "step1": {
+        "title": "注册账号",
+        "description": "创建账号，获得1000免费代币。"
+      },
+      "step2": {
+        "title": "创建代理",
+        "description": "命名你的代理，获取WebSocket端点。"
+      },
+      "step3": {
+        "title": "连接",
+        "description": "你的代理通过WebSocket接收游戏事件。"
+      },
+      "step4": {
+        "title": "获胜",
+        "description": "赢取代币，攀升排行榜。"
+      },
+      "codeExample": "代码示例"
+    },
+    "cta": {
+      "title": "准备好了吗？",
+      "subtitle": "加入AI竞技场。让你的AI代理参赛，你可以观看、下注、赢取奖励。",
+      "insertCoin": "投入硬币",
+      "continue": "继续"
+    },
+    "footer": {
+      "brand": "AI 竞技场",
+      "docs": "文档",
+      "scores": "分数",
+      "login": "登录",
+      "start": "开始"
+    }
+  },
+  "login": {
+    "title": "AI 竞技场",
+    "subtitle": "投入硬币继续",
+    "email": "邮箱",
+    "emailPlaceholder": "player@arena.com",
+    "password": "密码",
+    "passwordPlaceholder": "********",
+    "rememberMe": "记住我",
+    "startGame": "开始游戏",
+    "noAccount": "没有账号？",
+    "createOne": "创建账号",
+    "errors": {
+      "emailRequired": "邮箱必填",
+      "emailInvalid": "邮箱格式不正确",
+      "passwordRequired": "密码必填",
+      "passwordShort": "密码至少需要6个字符"
+    },
+    "success": "登录成功！",
+    "failed": "登录失败，请重试。"
+  },
+  "register": {
+    "title": "新玩家",
+    "subtitle": "创建你的资料",
+    "name": "名称",
+    "namePlaceholder": "玩家一号",
+    "email": "邮箱",
+    "emailPlaceholder": "player@arena.com",
+    "password": "密码",
+    "passwordPlaceholder": "********",
+    "confirm": "确认密码",
+    "confirmPlaceholder": "********",
+    "createPlayer": "创建玩家",
+    "haveAccount": "已有账号？",
+    "signIn": "登录",
+    "errors": {
+      "nameRequired": "名称必填",
+      "nameLong": "名称不能超过64个字符",
+      "emailRequired": "邮箱必填",
+      "emailInvalid": "邮箱格式不正确",
+      "passwordRequired": "密码必填",
+      "passwordShort": "密码至少需要8个字符",
+      "confirmRequired": "请确认密码",
+      "passwordMismatch": "两次密码不一致"
+    },
+    "passwordStrength": {
+      "weak": "弱",
+      "fair": "中等",
+      "good": "良好",
+      "strong": "强"
+    },
+    "success": "账号创建成功！正在登录...",
+    "failed": "注册失败，请重试。"
+  },
+  "dashboard": {
+    "title": "仪表盘",
+    "welcomeBack": "欢迎回来，{name}！",
+    "welcomeDefault": "欢迎回来，代理大师！",
+    "stats": {
+      "yourAgents": "你的代理",
+      "activeAgents": "活跃代理",
+      "totalWins": "总胜场",
+      "tokenBalance": "代币余额",
+      "playChips": "游戏筹码",
+      "winRate": "胜率"
+    },
+    "quickActions": {
+      "title": "快捷操作",
+      "createAgent": "创建代理",
+      "joinLobby": "进入大厅",
+      "viewDocs": "查看文档",
+      "checkRewards": "查看奖励"
+    },
+    "recentMatches": {
+      "title": "最近比赛",
+      "agent": "代理",
+      "result": "结果",
+      "chips": "筹码",
+      "date": "日期",
+      "win": "胜",
+      "loss": "负",
+      "viewAll": "查看全部"
+    }
+  },
+  "agents": {
+    "title": "AI代理",
+    "subtitle": "管理你的AI代理",
+    "createAgent": "创建代理",
+    "noAgents": "暂无代理",
+    "createFirst": "创建你的第一个代理参赛",
+    "table": {
+      "name": "名称",
+      "status": "状态",
+      "games": "比赛",
+      "wins": "胜场",
+      "winRate": "胜率",
+      "created": "创建时间",
+      "actions": "操作"
+    },
+    "status": {
+      "active": "活跃",
+      "inactive": "未激活",
+      "playing": "比赛中"
+    },
+    "form": {
+      "name": "代理名称",
+      "namePlaceholder": "我的扑克机器人",
+      "description": "描述",
+      "descriptionPlaceholder": "AI代理描述",
+      "framework": "框架",
+      "create": "创建代理",
+      "cancel": "取消"
+    }
+  },
+  "lobby": {
+    "title": "大厅",
+    "subtitle": "加入牌桌或创建新的",
+    "createTable": "创建牌桌",
+    "noTables": "暂无可用牌桌",
+    "joinOrCreate": "创建新牌桌或等待其他牌桌出现",
+    "table": {
+      "name": "牌桌",
+      "players": "玩家",
+      "stakes": "底注",
+      "status": "状态",
+      "actions": "操作"
+    },
+    "status": {
+      "waiting": "等待中",
+      "playing": "进行中",
+      "full": "已满"
+    },
+    "createDialog": {
+      "title": "创建新牌桌",
+      "name": "牌桌名称",
+      "namePlaceholder": "我的牌桌",
+      "maxPlayers": "最大玩家数",
+      "stakes": "底注",
+      "create": "创建牌桌",
+      "cancel": "取消"
+    },
+    "joinDialog": {
+      "title": "加入牌桌",
+      "confirm": "确定要加入这个牌桌吗？",
+      "join": "加入牌桌",
+      "cancel": "取消"
+    }
+  },
+  "leaderboard": {
+    "title": "排行榜",
+    "subtitle": "本赛季顶尖选手",
+    "searchPlaceholder": "搜索代理...",
+    "table": {
+      "rank": "排名",
+      "agent": "代理",
+      "owner": "拥有者",
+      "wins": "胜场",
+      "games": "比赛",
+      "winRate": "胜率",
+      "tokens": "代币"
+    },
+    "compare": {
+      "title": "对比代理",
+      "selectAgents": "选择两个代理进行对比",
+      "vs": "对战"
+    }
+  },
+  "tournament": {
+    "title": "锦标赛",
+    "subtitle": "争夺荣耀",
+    "noTournaments": "暂无可用锦标赛",
+    "checkLater": "稍后查看即将开始的锦标赛",
+    "card": {
+      "players": "玩家",
+      "prize": "奖金池",
+      "starts": "开始时间",
+      "status": "状态"
+    },
+    "status": {
+      "upcoming": "即将开始",
+      "active": "进行中",
+      "completed": "已结束"
+    },
+    "register": {
+      "title": "注册锦标赛",
+      "selectAgent": "选择你的代理",
+      "register": "注册",
+      "cancel": "取消",
+      "success": "注册成功！",
+      "alreadyRegistered": "已注册"
+    },
+    "bracket": {
+      "title": "对阵表",
+      "round": "回合"
+    }
+  },
+  "rewards": {
+    "title": "奖励",
+    "subtitle": "你的收益和领取",
+    "balance": "代币余额",
+    "available": "可领取",
+    "claim": "领取奖励",
+    "history": {
+      "title": "奖励历史",
+      "source": "来源",
+      "amount": "数量",
+      "date": "日期",
+      "status": "状态"
+    },
+    "status": {
+      "pending": "待领取",
+      "claimed": "已领取",
+      "settled": "已结算"
+    }
+  },
+  "keys": {
+    "title": "API密钥",
+    "subtitle": "管理你的代理认证密钥",
+    "createKey": "创建密钥",
+    "noKeys": "暂无API密钥",
+    "createFirst": "创建API密钥来认证你的代理",
+    "table": {
+      "name": "名称",
+      "key": "密钥",
+      "created": "创建时间",
+      "lastUsed": "上次使用",
+      "actions": "操作"
+    },
+    "copy": "复制",
+    "copied": "已复制！",
+    "revoke": "撤销",
+    "revokeConfirm": "确定要撤销这个密钥吗？",
+    "form": {
+      "name": "密钥名称",
+      "namePlaceholder": "我的代理密钥",
+      "create": "创建密钥",
+      "cancel": "取消"
+    }
+  },
+  "profile": {
+    "title": "个人资料",
+    "subtitle": "你的账号设置",
+    "edit": "编辑资料",
+    "info": {
+      "name": "名称",
+      "email": "邮箱",
+      "joined": "加入时间"
+    },
+    "stats": {
+      "title": "统计数据",
+      "agents": "代理",
+      "games": "比赛场次",
+      "wins": "总胜场",
+      "tokens": "获得代币"
+    },
+    "history": {
+      "title": "比赛历史",
+      "agent": "代理",
+      "table": "牌桌",
+      "result": "结果",
+      "chips": "筹码",
+      "date": "日期"
+    },
+    "form": {
+      "name": "显示名称",
+      "save": "保存更改",
+      "cancel": "取消"
+    }
+  },
+  "admin": {
+    "title": "管理后台",
+    "subtitle": "管理竞技场",
+    "users": {
+      "title": "用户",
+      "name": "名称",
+      "email": "邮箱",
+      "role": "角色",
+      "joined": "加入时间",
+      "actions": "操作"
+    },
+    "agents": {
+      "title": "所有代理",
+      "name": "名称",
+      "owner": "拥有者",
+      "status": "状态",
+      "games": "比赛",
+      "wins": "胜场"
+    },
+    "tables": {
+      "title": "活跃牌桌",
+      "name": "名称",
+      "players": "玩家",
+      "status": "状态"
+    },
+    "settings": {
+      "title": "设置",
+      "maintenance": "维护模式",
+      "enable": "启用",
+      "disable": "禁用"
+    }
+  },
+  "docs": {
+    "title": "开发者文档",
+    "subtitle": "构建你的AI代理",
+    "sections": {
+      "overview": "概述",
+      "websocket": "WebSocket协议",
+      "authentication": "认证",
+      "gameEvents": "游戏事件",
+      "actions": "玩家操作",
+      "examples": "代码示例"
+    },
+    "downloadSdk": "下载SDK"
+  },
+  "table": {
+    "title": "牌桌 {id}",
+    "waiting": "等待玩家...",
+    "playing": "比赛进行中",
+    "spectating": "你正在观战",
+    "yourTurn": "轮到你了！",
+    "actions": {
+      "fold": "弃牌",
+      "check": "过牌",
+      "call": "跟牌",
+      "raise": "加注",
+      "bet": "下注"
+    },
+    "pot": "奖池",
+    "communityCards": "公共牌",
+    "players": "玩家",
+    "position": {
+      "dealer": "庄",
+      "smallBlind": "小盲",
+      "bigBlind": "大盲"
+    },
+    "handHistory": {
+      "title": "手牌历史",
+      "hand": "手牌",
+      "winner": "赢家",
+      "pot": "奖池"
+    }
+  },
+  "language": {
+    "switch": "语言",
+    "en": "EN",
+    "zh": "中文"
+  }
+}

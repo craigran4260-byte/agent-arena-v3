@@ -7,6 +7,15 @@
   position: relative;
 }
 
+/* Language Switcher Bar */
+.languageBar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: var(--space-4);
+  z-index: 1000;
+}
+
 /* CRT scanline overlay on entire page */
 .container::before {
   content: '';

@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react';
 import { Header } from '@/components/layout';
 import { Button, Skeleton, Badge, Modal, useToast } from '@/components/ui';
 import { ShieldIcon, KeyIcon, CopyIcon, TrashIcon } from '@/components/icons';
+import { useTranslation } from '@/contexts/LanguageContext';
 import styles from './page.module.css';
 
 interface ApiKey {
@@ -29,6 +30,7 @@ interface KeyCounts {
 export default function ApiKeysPage() {
   const { data: session } = useSession();
   const { addToast } = useToast();
+  const { t } = useTranslation();
   const [keys, setKeys] = useState<ApiKey[]>([]);
   const [counts, setCounts] = useState<KeyCounts>({ total: 0, active: 0, revoked: 0 });
   const [loading, setLoading] = useState(true);
@@ -46,11 +48,11 @@ export default function ApiKeysPage() {
       setKeys(data.keys);
       setCounts(data.counts);
     } catch (error) {
-      addToast('Failed to load API keys', 'error');
+      addToast(t('common.error'), 'error');
     } finally {
       setLoading(false);
     }
-  }, [addToast]);
+  }, [addToast, t]);
 
   useEffect(() => {
     if (session?.user) {
@@ -79,9 +81,9 @@ export default function ApiKeysPage() {
       setCreatedKey(data.fullKey);
       setKeys(prev => [...prev, data.key]);
       setCounts(prev => ({ ...prev, total: prev.total + 1, active: prev.active + 1 }));
-      addToast('API key created successfully', 'success');
+      addToast(t('common.success'), 'success');
     } catch (error) {
-      addToast(error instanceof Error ? error.message : 'Failed to create key', 'error');
+      addToast(error instanceof Error ? error.message : t('common.error'), 'error');
     } finally {
       setCreating(false);
     }
@@ -97,9 +99,9 @@ export default function ApiKeysPage() {
 
       setKeys(prev => prev.map(k => k.id === keyId ? { ...k, revoked: true } : k));
       setCounts(prev => ({ ...prev, active: prev.active - 1, revoked: prev.revoked + 1 }));
-      addToast('API key revoked', 'success');
+      addToast(t('common.success'), 'success');
     } catch (error) {
-      addToast('Failed to revoke key', 'error');
+      addToast(t('common.error'), 'error');
     }
   };
 
@@ -113,18 +115,18 @@ export default function ApiKeysPage() {
 
       setKeys(prev => prev.filter(k => k.id !== keyId));
       setCounts(prev => ({ ...prev, total: prev.total - 1 }));
-      addToast('API key deleted', 'success');
+      addToast(t('common.success'), 'success');
     } catch (error) {
-      addToast('Failed to delete key', 'error');
+      addToast(t('common.error'), 'error');
     }
   };
 
   const copyToClipboard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      addToast('Copied to clipboard', 'success');
+      addToast(t('keys.copied'), 'success');
     } catch {
-      addToast('Failed to copy', 'error');
+      addToast(t('common.error'), 'error');
     }
   };
 
@@ -143,8 +145,8 @@ export default function ApiKeysPage() {
   return (
     <>
       <Header
-        title="API Keys"
-        subtitle="Manage API keys for agent authentication"
+        title={t('keys.title')}
+        subtitle={t('keys.subtitle')}
         showBackButton
       />
 
@@ -157,7 +159,7 @@ export default function ApiKeysPage() {
             </div>
             <div className={styles.statContent}>
               <div className={styles.statValue}>{counts.total}</div>
-              <div className={styles.statLabel}>Total Keys</div>
+              <div className={styles.statLabel}>{t('keys.table.name')}</div>
             </div>
           </div>
           <div className={styles.statCard}>
@@ -166,7 +168,7 @@ export default function ApiKeysPage() {
             </div>
             <div className={styles.statContent}>
               <div className={styles.statValue}>{counts.active}</div>
-              <div className={styles.statLabel}>Active Keys</div>
+              <div className={styles.statLabel}>{t('agents.status.active')}</div>
             </div>
           </div>
         </div>
@@ -178,7 +180,7 @@ export default function ApiKeysPage() {
             onClick={() => setShowCreateModal(true)}
             disabled={creating}
           >
-            + Create New Key
+            + {t('keys.createKey')}
           </Button>
         </div>
 
@@ -193,10 +195,10 @@ export default function ApiKeysPage() {
           ) : keys.length === 0 ? (
             <div className={styles.emptyState}>
               <KeyIcon size={48} />
-              <h3>No API Keys</h3>
-              <p>Create an API key to authenticate your agents with the platform.</p>
+              <h3>{t('keys.noKeys')}</h3>
+              <p>{t('keys.createFirst')}</p>
               <Button variant="primary" onClick={() => setShowCreateModal(true)}>
-                Create First Key
+                {t('keys.createKey')}
               </Button>
             </div>
           ) : (
@@ -227,8 +229,8 @@ export default function ApiKeysPage() {
                 </div>
 
                 <div className={styles.keyMeta}>
-                  <span>Created: {formatDate(key.createdAt)}</span>
-                  <span>Last used: {formatDate(key.lastUsedAt)}</span>
+                  <span>{t('agents.table.created')}: {formatDate(key.createdAt)}</span>
+                  <span>{t('keys.table.lastUsed')}: {formatDate(key.lastUsedAt)}</span>
                 </div>
 
                 <div className={styles.keyActions}>
@@ -238,7 +240,7 @@ export default function ApiKeysPage() {
                       size="sm"
                       onClick={() => handleRevokeKey(key.id)}
                     >
-                      Revoke
+                      {t('keys.revoke')}
                     </Button>
                   )}
                   <Button
@@ -247,7 +249,7 @@ export default function ApiKeysPage() {
                     onClick={() => handleDeleteKey(key.id)}
                   >
                     <TrashIcon size={16} />
-                    Delete
+                    {t('common.delete')}
                   </Button>
                 </div>
               </div>
@@ -265,13 +267,13 @@ export default function ApiKeysPage() {
           setNewKeyPermissions(['read']);
           setCreatedKey(null);
         }}
-        title="Create API Key"
+        title={t('keys.createKey')}
       >
         {createdKey ? (
           <div className={styles.createdKeySection}>
             <div className={styles.successMessage}>
               <ShieldIcon size={32} />
-              <h4>API Key Created!</h4>
+              <h4>{t('common.success')}</h4>
               <p>Save this key now - it will not be shown again.</p>
             </div>
             <div className={styles.createdKeyBox}>
@@ -294,19 +296,19 @@ export default function ApiKeysPage() {
                 setNewKeyPermissions(['read']);
               }}
             >
-              Done
+              {t('common.close')}
             </Button>
           </div>
         ) : (
           <div className={styles.createForm}>
             <div className={styles.formGroup}>
-              <label htmlFor="keyName">Key Name (optional)</label>
+              <label htmlFor="keyName">{t('keys.form.name')} (optional)</label>
               <input
                 id="keyName"
                 type="text"
                 value={newKeyName}
                 onChange={(e) => setNewKeyName(e.target.value)}
-                placeholder="e.g., Production Agent"
+                placeholder={t('keys.form.namePlaceholder')}
                 maxLength={64}
               />
             </div>
@@ -335,14 +337,14 @@ export default function ApiKeysPage() {
 
             <div className={styles.formActions}>
               <Button variant="ghost" onClick={() => setShowCreateModal(false)}>
-                Cancel
+                {t('common.cancel')}
               </Button>
               <Button
                 variant="primary"
                 onClick={handleCreateKey}
                 loading={creating}
               >
-                Create Key
+                {t('keys.form.create')}
               </Button>
             </div>
           </div>

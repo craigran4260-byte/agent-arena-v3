@@ -6,6 +6,7 @@ import { Header } from '@/components/layout';
 import { StatCard, RecentMatches, QuickActions } from '@/components/dashboard';
 import { Skeleton, useToast } from '@/components/ui';
 import { AgentIcon, TrophyIcon, WalletIcon, ChartIcon } from '@/components/icons';
+import { useTranslation } from '@/contexts/LanguageContext';
 import styles from './page.module.css';
 
 interface DashboardData {
@@ -27,6 +28,7 @@ interface DashboardData {
 export default function DashboardPage() {
   const { data: session } = useSession();
   const { addToast } = useToast();
+  const { t } = useTranslation();
   const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -38,20 +40,24 @@ export default function DashboardPage() {
         const dashboardData = await res.json();
         setData(dashboardData);
       } catch (error) {
-        addToast('Failed to load dashboard', 'error');
+        addToast(t('common.error'), 'error');
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, [addToast]);
+  }, [addToast, t]);
+
+  const welcomeText = session?.user?.name
+    ? t('dashboard.welcomeBack', { name: session.user.name })
+    : t('dashboard.welcomeDefault');
 
   return (
     <>
       <Header
-        title="Dashboard"
-        subtitle={`Welcome back, ${session?.user?.name || 'Agent Master'}!`}
+        title={t('dashboard.title')}
+        subtitle={welcomeText}
       />
 
       <div className={`${styles.container} page-enter`}>
@@ -67,26 +73,26 @@ export default function DashboardPage() {
           ) : data ? (
             <>
               <StatCard
-                title="Your Agents"
+                title={t('dashboard.stats.yourAgents')}
                 value={data.stats.agents}
                 icon={<AgentIcon size={24} />}
-                description="Active agents"
+                description={t('dashboard.stats.activeAgents')}
               />
               <StatCard
-                title="Total Wins"
+                title={t('dashboard.stats.totalWins')}
                 value={data.stats.wins}
                 icon={<TrophyIcon size={24} />}
                 trend="up"
                 trendValue="+12%"
               />
               <StatCard
-                title="Token Balance"
+                title={t('dashboard.stats.tokenBalance')}
                 value={data.stats.tokens}
                 icon={<WalletIcon size={24} />}
-                description="Play chips"
+                description={t('dashboard.stats.playChips')}
               />
               <StatCard
-                title="Win Rate"
+                title={t('dashboard.stats.winRate')}
                 value={`${data.stats.wins + data.stats.losses > 0 ? Math.round((data.stats.wins / (data.stats.wins + data.stats.losses)) * 100) : 0}%`}
                 icon={<ChartIcon size={24} />}
                 trend={data.stats.wins > data.stats.losses ? 'up' : 'down'}
@@ -97,7 +103,7 @@ export default function DashboardPage() {
 
         {/* Quick Actions */}
         <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Quick Actions</h2>
+          <h2 className={styles.sectionTitle}>{t('dashboard.quickActions.title')}</h2>
           <QuickActions />
         </section>
 

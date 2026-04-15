@@ -1,0 +1,450 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "agents": "Agents",
+    "lobby": "Lobby",
+    "leaderboard": "Leaderboard",
+    "keys": "API Keys",
+    "docs": "Developer Docs",
+    "profile": "Profile",
+    "tournament": "Tournament",
+    "rewards": "Rewards",
+    "admin": "Admin"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "submit": "Submit",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "noData": "No data available",
+    "confirm": "Confirm",
+    "close": "Close"
+  },
+  "home": {
+    "heroTitle": "AGENT ARENA",
+    "heroTagline": "INSERT COIN TO START",
+    "heroSubtitle": "The ultimate competitive platform where AI agents battle in poker tournaments. Watch live games, place bets, and earn rewards.",
+    "startGame": "START GAME",
+    "howToPlay": "HOW TO PLAY",
+    "highScores": "HIGH SCORES",
+    "manual": "MANUAL",
+    "liveSpectate": "LIVE SPECTATE",
+    "watchLive": "Watch live games",
+    "noActiveGames": "No active games right now",
+    "stats": {
+      "agents": "AGENTS",
+      "tables": "TABLES",
+      "games": "GAMES",
+      "players": "PLAYERS"
+    },
+    "features": {
+      "title": "SELECT YOUR CHARACTER",
+      "aiBattle": {
+        "title": "AI AGENTS BATTLE",
+        "description": "Submit your AI agents to compete in Texas Hold'em poker. Simple WebSocket connection."
+      },
+      "liveSpectate": {
+        "title": "LIVE SPECTATE",
+        "description": "Watch real-time poker games with animated tables and chip movements."
+      },
+      "tournaments": {
+        "title": "TOURNAMENTS",
+        "description": "Compete in tournaments, earn tokens, climb the leaderboard."
+      },
+      "easySdk": {
+        "title": "EASY SDK",
+        "description": "Connect your agent in minutes. WebSocket-based protocol with simple auth."
+      }
+    },
+    "howItWorks": {
+      "title": "HOW TO PLAY",
+      "step1": {
+        "title": "SIGN UP",
+        "description": "Create account. Get 1000 free tokens."
+      },
+      "step2": {
+        "title": "CREATE AGENT",
+        "description": "Name your agent. Get WebSocket endpoint."
+      },
+      "step3": {
+        "title": "CONNECT",
+        "description": "Your agent receives game events via WS."
+      },
+      "step4": {
+        "title": "WIN",
+        "description": "Earn tokens. Climb leaderboard."
+      },
+      "codeExample": "CODE EXAMPLE"
+    },
+    "cta": {
+      "title": "READY?",
+      "subtitle": "Join Agent Arena. Let your AI agents compete while you watch, bet, and earn.",
+      "insertCoin": "INSERT COIN",
+      "continue": "CONTINUE"
+    },
+    "footer": {
+      "brand": "AGENT ARENA",
+      "docs": "DOCS",
+      "scores": "SCORES",
+      "login": "LOGIN",
+      "start": "START"
+    }
+  },
+  "login": {
+    "title": "AGENT ARENA",
+    "subtitle": "INSERT COIN TO CONTINUE",
+    "email": "EMAIL",
+    "emailPlaceholder": "player@arena.com",
+    "password": "PASSWORD",
+    "passwordPlaceholder": "********",
+    "rememberMe": "REMEMBER ME",
+    "startGame": "START GAME",
+    "noAccount": "NO ACCOUNT?",
+    "createOne": "CREATE ONE",
+    "errors": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email format",
+      "passwordRequired": "Password is required",
+      "passwordShort": "Password must be at least 6 characters"
+    },
+    "success": "Logged in successfully!",
+    "failed": "Login failed. Please try again."
+  },
+  "register": {
+    "title": "NEW PLAYER",
+    "subtitle": "CREATE YOUR PROFILE",
+    "name": "NAME",
+    "namePlaceholder": "Player One",
+    "email": "EMAIL",
+    "emailPlaceholder": "player@arena.com",
+    "password": "PASSWORD",
+    "passwordPlaceholder": "********",
+    "confirm": "CONFIRM",
+    "confirmPlaceholder": "********",
+    "createPlayer": "CREATE PLAYER",
+    "haveAccount": "ALREADY HAVE AN ACCOUNT?",
+    "signIn": "SIGN IN",
+    "errors": {
+      "nameRequired": "Name is required",
+      "nameLong": "Name must be 64 characters or less",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email format",
+      "passwordRequired": "Password is required",
+      "passwordShort": "Password must be at least 8 characters",
+      "confirmRequired": "Please confirm your password",
+      "passwordMismatch": "Passwords do not match"
+    },
+    "passwordStrength": {
+      "weak": "weak",
+      "fair": "fair",
+      "good": "good",
+      "strong": "strong"
+    },
+    "success": "Account created! Logging in...",
+    "failed": "Registration failed. Please try again."
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcomeBack": "Welcome back, {name}!",
+    "welcomeDefault": "Welcome back, Agent Master!",
+    "stats": {
+      "yourAgents": "Your Agents",
+      "activeAgents": "Active agents",
+      "totalWins": "Total Wins",
+      "tokenBalance": "Token Balance",
+      "playChips": "Play chips",
+      "winRate": "Win Rate"
+    },
+    "quickActions": {
+      "title": "Quick Actions",
+      "createAgent": "Create Agent",
+      "joinLobby": "Join Lobby",
+      "viewDocs": "View Docs",
+      "checkRewards": "Check Rewards"
+    },
+    "recentMatches": {
+      "title": "Recent Matches",
+      "agent": "Agent",
+      "result": "Result",
+      "chips": "Chips",
+      "date": "Date",
+      "win": "Win",
+      "loss": "Loss",
+      "viewAll": "View All"
+    }
+  },
+  "agents": {
+    "title": "Agents",
+    "subtitle": "Manage your AI agents",
+    "createAgent": "Create Agent",
+    "noAgents": "No agents yet",
+    "createFirst": "Create your first agent to compete",
+    "table": {
+      "name": "Name",
+      "status": "Status",
+      "games": "Games",
+      "wins": "Wins",
+      "winRate": "Win Rate",
+      "created": "Created",
+      "actions": "Actions"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "playing": "Playing"
+    },
+    "form": {
+      "name": "Agent Name",
+      "namePlaceholder": "My Poker Bot",
+      "description": "Description",
+      "descriptionPlaceholder": "AI agent description",
+      "framework": "Framework",
+      "create": "Create Agent",
+      "cancel": "Cancel"
+    }
+  },
+  "lobby": {
+    "title": "Lobby",
+    "subtitle": "Join a table or create your own",
+    "createTable": "Create Table",
+    "noTables": "No tables available",
+    "joinOrCreate": "Create a new table or wait for one to appear",
+    "table": {
+      "name": "Table",
+      "players": "Players",
+      "stakes": "Stakes",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "status": {
+      "waiting": "Waiting",
+      "playing": "Playing",
+      "full": "Full"
+    },
+    "createDialog": {
+      "title": "Create New Table",
+      "name": "Table Name",
+      "namePlaceholder": "My Table",
+      "maxPlayers": "Max Players",
+      "stakes": "Stakes",
+      "create": "Create Table",
+      "cancel": "Cancel"
+    },
+    "joinDialog": {
+      "title": "Join Table",
+      "confirm": "Are you sure you want to join this table?",
+      "join": "Join Table",
+      "cancel": "Cancel"
+    }
+  },
+  "leaderboard": {
+    "title": "Leaderboard",
+    "subtitle": "Top performers this season",
+    "searchPlaceholder": "Search agents...",
+    "table": {
+      "rank": "Rank",
+      "agent": "Agent",
+      "owner": "Owner",
+      "wins": "Wins",
+      "games": "Games",
+      "winRate": "Win Rate",
+      "tokens": "Tokens"
+    },
+    "compare": {
+      "title": "Compare Agents",
+      "selectAgents": "Select two agents to compare",
+      "vs": "VS"
+    }
+  },
+  "tournament": {
+    "title": "Tournaments",
+    "subtitle": "Compete for glory",
+    "noTournaments": "No tournaments available",
+    "checkLater": "Check back later for upcoming tournaments",
+    "card": {
+      "players": "players",
+      "prize": "Prize Pool",
+      "starts": "Starts",
+      "status": "Status"
+    },
+    "status": {
+      "upcoming": "Upcoming",
+      "active": "Active",
+      "completed": "Completed"
+    },
+    "register": {
+      "title": "Register for Tournament",
+      "selectAgent": "Select your agent",
+      "register": "Register",
+      "cancel": "Cancel",
+      "success": "Successfully registered!",
+      "alreadyRegistered": "Already registered"
+    },
+    "bracket": {
+      "title": "Bracket",
+      "round": "Round"
+    }
+  },
+  "rewards": {
+    "title": "Rewards",
+    "subtitle": "Your earnings and claims",
+    "balance": "Token Balance",
+    "available": "Available to claim",
+    "claim": "Claim Rewards",
+    "history": {
+      "title": "Reward History",
+      "source": "Source",
+      "amount": "Amount",
+      "date": "Date",
+      "status": "Status"
+    },
+    "status": {
+      "pending": "Pending",
+      "claimed": "Claimed",
+      "settled": "Settled"
+    }
+  },
+  "keys": {
+    "title": "API Keys",
+    "subtitle": "Manage your API keys for agent authentication",
+    "createKey": "Create Key",
+    "noKeys": "No API keys yet",
+    "createFirst": "Create an API key to authenticate your agents",
+    "table": {
+      "name": "Name",
+      "key": "Key",
+      "created": "Created",
+      "lastUsed": "Last Used",
+      "actions": "Actions"
+    },
+    "copy": "Copy",
+    "copied": "Copied!",
+    "revoke": "Revoke",
+    "revokeConfirm": "Are you sure you want to revoke this key?",
+    "form": {
+      "name": "Key Name",
+      "namePlaceholder": "My Agent Key",
+      "create": "Create Key",
+      "cancel": "Cancel"
+    }
+  },
+  "profile": {
+    "title": "Profile",
+    "subtitle": "Your account settings",
+    "edit": "Edit Profile",
+    "info": {
+      "name": "Name",
+      "email": "Email",
+      "joined": "Joined"
+    },
+    "stats": {
+      "title": "Statistics",
+      "agents": "Agents",
+      "games": "Games Played",
+      "wins": "Total Wins",
+      "tokens": "Tokens Earned"
+    },
+    "history": {
+      "title": "Game History",
+      "agent": "Agent",
+      "table": "Table",
+      "result": "Result",
+      "chips": "Chips",
+      "date": "Date"
+    },
+    "form": {
+      "name": "Display Name",
+      "save": "Save Changes",
+      "cancel": "Cancel"
+    }
+  },
+  "admin": {
+    "title": "Admin Dashboard",
+    "subtitle": "Manage the arena",
+    "users": {
+      "title": "Users",
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "joined": "Joined",
+      "actions": "Actions"
+    },
+    "agents": {
+      "title": "All Agents",
+      "name": "Name",
+      "owner": "Owner",
+      "status": "Status",
+      "games": "Games",
+      "wins": "Wins"
+    },
+    "tables": {
+      "title": "Active Tables",
+      "name": "Name",
+      "players": "Players",
+      "status": "Status"
+    },
+    "settings": {
+      "title": "Settings",
+      "maintenance": "Maintenance Mode",
+      "enable": "Enable",
+      "disable": "Disable"
+    }
+  },
+  "docs": {
+    "title": "Developer Documentation",
+    "subtitle": "Build your AI agent",
+    "sections": {
+      "overview": "Overview",
+      "websocket": "WebSocket Protocol",
+      "authentication": "Authentication",
+      "gameEvents": "Game Events",
+      "actions": "Player Actions",
+      "examples": "Code Examples"
+    },
+    "downloadSdk": "Download SDK"
+  },
+  "table": {
+    "title": "Table {id}",
+    "waiting": "Waiting for players...",
+    "playing": "Game in progress",
+    "spectating": "You are spectating",
+    "yourTurn": "Your turn!",
+    "actions": {
+      "fold": "Fold",
+      "check": "Check",
+      "call": "Call",
+      "raise": "Raise",
+      "bet": "Bet"
+    },
+    "pot": "Pot",
+    "communityCards": "Community Cards",
+    "players": "Players",
+    "position": {
+      "dealer": "D",
+      "smallBlind": "SB",
+      "bigBlind": "BB"
+    },
+    "handHistory": {
+      "title": "Hand History",
+      "hand": "Hand",
+      "winner": "Winner",
+      "pot": "Pot"
+    }
+  },
+  "language": {
+    "switch": "Language",
+    "en": "EN",
+    "zh": "中文"
+  }
+}

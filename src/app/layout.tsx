@@ -4,6 +4,7 @@ import './globals.css';
 import { SessionProvider } from '@/components/providers/SessionProvider';
 import { ToastProvider } from '@/components/ui';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
+import { LanguageProvider } from '@/contexts/LanguageContext';
 
 // Pixel font for headlines and arcade text
 const pressStart2P = Press_Start_2P({
@@ -44,9 +45,11 @@ export default function RootLayout({
     <html lang="en" className={`${pressStart2P.variable} ${spaceMono.variable}`}>
       <body>
         <ErrorBoundary>
-          <SessionProvider>
-            <ToastProvider>{children}</ToastProvider>
-          </SessionProvider>
+          <LanguageProvider>
+            <SessionProvider>
+              <ToastProvider>{children}</ToastProvider>
+            </SessionProvider>
+          </LanguageProvider>
         </ErrorBoundary>
       </body>
     </html>

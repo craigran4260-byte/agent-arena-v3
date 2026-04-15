@@ -5,6 +5,7 @@ import { Header } from '@/components/layout';
 import { Card, DataTable, Input, useToast, Skeleton, Button } from '@/components/ui';
 import { ComparePanel } from '@/components/leaderboard';
 import { TrophyIcon } from '@/components/icons';
+import { useTranslation } from '@/contexts/LanguageContext';
 import styles from './page.module.css';
 
 interface LeaderboardEntry {
@@ -21,6 +22,7 @@ type SortBy = 'winRate' | 'gamesPlayed' | 'wins';
 
 export default function LeaderboardPage() {
   const { addToast } = useToast();
+  const { t } = useTranslation();
   const [agents, setAgents] = useState<LeaderboardEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -40,7 +42,7 @@ export default function LeaderboardPage() {
       const data = await res.json();
       setAgents(data);
     } catch (error: any) {
-      addToast('Failed to load leaderboard', 'error');
+      addToast(t('common.error'), 'error');
     } finally {
       setLoading(false);
     }
@@ -55,7 +57,7 @@ export default function LeaderboardPage() {
         const data = await res.json();
         setAgents(data);
       } catch (error: any) {
-        addToast('Search failed', 'error');
+        addToast(t('common.error'), 'error');
       }
     } else {
       fetchLeaderboard();
@@ -80,7 +82,7 @@ export default function LeaderboardPage() {
   const columns = [
     {
       key: 'rank',
-      label: 'Rank',
+      label: t('leaderboard.table.rank'),
       render: (value: number) => (
         <div className={styles.rankCell}>
           {value === 1 && <span className={styles.medal}>🥇</span>}
@@ -92,39 +94,39 @@ export default function LeaderboardPage() {
     },
     {
       key: 'name',
-      label: 'Agent Name',
+      label: t('leaderboard.table.agent'),
       render: (value: string) => <span className={styles.agentName}>{value}</span>,
     },
     {
       key: 'winRate',
-      label: 'Win Rate',
+      label: t('leaderboard.table.winRate'),
       render: (value: number) => <span className={styles.winRate}>{value.toFixed(1)}%</span>,
     },
     {
       key: 'wins',
-      label: 'Wins',
+      label: t('leaderboard.table.wins'),
       render: (value: number) => <span className={styles.wins}>{value.toLocaleString()}</span>,
     },
     {
       key: 'losses',
-      label: 'Losses',
+      label: t('agents.table.losses'),
       render: (value: number) => value.toLocaleString(),
     },
     {
       key: 'gamesPlayed',
-      label: 'Games',
+      label: t('leaderboard.table.games'),
       render: (value: number) => value.toLocaleString(),
     },
     {
       key: 'id',
-      label: 'Action',
+      label: t('lobby.table.actions'),
       render: (value: number) => (
         <Button
           variant={selectedForCompare.includes(value) ? 'primary' : 'secondary'}
           size="sm"
           onClick={() => handleCompareClick(value)}
         >
-          {selectedForCompare.includes(value) ? '✓' : 'Compare'}
+          {selectedForCompare.includes(value) ? '✓' : t('leaderboard.compare.title')}
         </Button>
       ),
     },
@@ -133,7 +135,7 @@ export default function LeaderboardPage() {
   if (loading && agents.length === 0) {
     return (
       <>
-        <Header title="Agent Leaderboard" showBackButton />
+        <Header title={t('leaderboard.title')} showBackButton />
         <div className={styles.container}>
           <Skeleton width="100%" height="120px" variant="rect" />
           <Skeleton width="100%" height="400px" variant="rect" />
@@ -144,13 +146,13 @@ export default function LeaderboardPage() {
 
   return (
     <>
-      <Header title="Agent Leaderboard" showBackButton />
+      <Header title={t('leaderboard.title')} showBackButton />
 
       <div className={styles.container}>
         {/* Controls */}
         <div className={styles.controls}>
           <Input
-            placeholder="Search agents by name..."
+            placeholder={t('leaderboard.searchPlaceholder')}
             value={searchTerm}
             onChange={(e) => handleSearch(e.target.value)}
           />
@@ -181,7 +183,7 @@ export default function LeaderboardPage() {
           {agents.length === 0 ? (
             <div className={styles.emptyState}>
               <TrophyIcon size={48} />
-              <p>No agents found</p>
+              <p>{t('common.noData')}</p>
             </div>
           ) : (
             <DataTable

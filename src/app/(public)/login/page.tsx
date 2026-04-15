@@ -5,13 +5,15 @@ import { signIn } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { LogoIcon } from '@/components/icons';
-import { Button, Input, Card, useToast } from '@/components/ui';
+import { Button, Input, Card, useToast, LanguageSwitcher } from '@/components/ui';
+import { useTranslation } from '@/contexts/LanguageContext';
 import styles from './page.module.css';
 
 export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { addToast } = useToast();
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -20,13 +22,13 @@ export default function LoginPage() {
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
 
-    if (!formData.email) newErrors.email = 'Email is required';
+    if (!formData.email) newErrors.email = t('login.errors.emailRequired');
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Invalid email format';
+      newErrors.email = t('login.errors.emailInvalid');
     }
 
-    if (!formData.password) newErrors.password = 'Password is required';
-    else if (formData.password.length < 6) newErrors.password = 'Password must be at least 6 characters';
+    if (!formData.password) newErrors.password = t('login.errors.passwordRequired');
+    else if (formData.password.length < 6) newErrors.password = t('login.errors.passwordShort');
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -48,11 +50,11 @@ export default function LoginPage() {
         addToast(result.error, 'error');
         setErrors({ form: result.error });
       } else if (result?.ok) {
-        addToast('Logged in successfully!', 'success');
+        addToast(t('login.success'), 'success');
         router.push('/dashboard');
       }
     } catch (error) {
-      addToast('Login failed. Please try again.', 'error');
+      addToast(t('login.failed'), 'error');
     } finally {
       setLoading(false);
     }
@@ -62,21 +64,26 @@ export default function LoginPage() {
 
   return (
     <div className={styles.pageWrapper}>
+      {/* Language Switcher */}
+      <div className={styles.languageBar}>
+        <LanguageSwitcher />
+      </div>
+
       <Card variant="default" padding="lg" className={styles.card}>
         <div className={styles.header}>
           <LogoIcon size={40} color="#FFD700" />
-          <h1 className={styles.title}>AGENT ARENA</h1>
+          <h1 className={styles.title}>{t('login.title')}</h1>
         </div>
 
-        <p className={styles.subtitle}>INSERT COIN TO CONTINUE</p>
+        <p className={styles.subtitle}>{t('login.subtitle')}</p>
 
         {errorMessage && <div className={styles.error}>{errorMessage}</div>}
 
         <form onSubmit={handleSubmit} className={styles.form}>
           <Input
-            label="EMAIL"
+            label={t('login.email')}
             type="email"
-            placeholder="player@arena.com"
+            placeholder={t('login.emailPlaceholder')}
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             error={errors.email}
@@ -84,9 +91,9 @@ export default function LoginPage() {
           />
 
           <Input
-            label="PASSWORD"
+            label={t('login.password')}
             type="password"
-            placeholder="********"
+            placeholder={t('login.passwordPlaceholder')}
             value={formData.password}
             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
             error={errors.password}
@@ -99,18 +106,18 @@ export default function LoginPage() {
               checked={rememberMe}
               onChange={(e) => setRememberMe(e.target.checked)}
             />
-            <span>REMEMBER ME</span>
+            <span>{t('login.rememberMe')}</span>
           </label>
 
           <Button type="submit" variant="primary" size="lg" fullWidth loading={loading}>
-            START GAME
+            {t('login.startGame')}
           </Button>
         </form>
 
         <p className={styles.footer}>
-          NO ACCOUNT?{' '}
+          {t('login.noAccount')}{' '}
           <Link href="/register" className={styles.link}>
-            CREATE ONE
+            {t('login.createOne')}
           </Link>
         </p>
       </Card>

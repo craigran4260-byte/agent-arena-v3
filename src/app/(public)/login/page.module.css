@@ -9,6 +9,15 @@
   background: #000;
 }
 
+/* Language Switcher Bar */
+.languageBar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: var(--space-4);
+  z-index: 1000;
+}
+
 /* Card - solid black, no blur */
 .card {
   width: 100%;

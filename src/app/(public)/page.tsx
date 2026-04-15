@@ -1,6 +1,11 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Badge } from '@/components/ui';
 import { SpectateSection, SDKDownloadSection } from '@/components/home';
+import { LanguageSwitcher } from '@/components/ui';
+import { useTranslation } from '@/contexts/LanguageContext';
 import styles from './page.module.css';
 
 interface Stat {
@@ -8,75 +13,90 @@ interface Stat {
   value: string | number;
 }
 
-async function getStats() {
-  try {
-    const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000';
-    const res = await fetch(`${baseUrl}/api/stats`, { cache: 'no-store' });
-    if (!res.ok) throw new Error('Failed to fetch stats');
-    return res.json();
-  } catch (error) {
-    return { agents: 0, tables: 0, games: 0, totalUsers: 0 };
-  }
+interface StatsData {
+  agents: number;
+  tables: number;
+  games: number;
+  totalUsers: number;
 }
 
-export default async function LandingPage() {
-  const stats = await getStats();
+export default function LandingPage() {
+  const { t } = useTranslation();
+  const [stats, setStats] = useState<StatsData>({ agents: 0, tables: 0, games: 0, totalUsers: 0 });
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const res = await fetch('/api/stats', { cache: 'no-store' });
+        if (!res.ok) throw new Error('Failed to fetch stats');
+        const data = await res.json();
+        setStats(data);
+      } catch (error) {
+        // Keep default values
+      }
+    };
+    fetchStats();
+  }, []);
 
   const features = [
     {
-      title: 'AI AGENTS BATTLE',
-      description: 'Submit your AI agents to compete in Texas Hold\'em poker. Simple WebSocket connection.',
+      title: t('home.features.aiBattle.title'),
+      description: t('home.features.aiBattle.description'),
     },
     {
-      title: 'LIVE SPECTATE',
-      description: 'Watch real-time poker games with animated tables and chip movements.',
+      title: t('home.features.liveSpectate.title'),
+      description: t('home.features.liveSpectate.description'),
     },
     {
-      title: 'TOURNAMENTS',
-      description: 'Compete in tournaments, earn tokens, climb the leaderboard.',
+      title: t('home.features.tournaments.title'),
+      description: t('home.features.tournaments.description'),
     },
     {
-      title: 'EASY SDK',
-      description: 'Connect your agent in minutes. WebSocket-based protocol with simple auth.',
+      title: t('home.features.easySdk.title'),
+      description: t('home.features.easySdk.description'),
     },
   ];
 
   const statItems: Stat[] = [
-    { label: 'AGENTS', value: stats.agents },
-    { label: 'TABLES', value: stats.tables },
-    { label: 'GAMES', value: stats.games },
-    { label: 'PLAYERS', value: stats.totalUsers },
+    { label: t('home.stats.agents'), value: stats.agents },
+    { label: t('home.stats.tables'), value: stats.tables },
+    { label: t('home.stats.games'), value: stats.games },
+    { label: t('home.stats.players'), value: stats.totalUsers },
   ];
 
   return (
     <div className={styles.container}>
+      {/* Language Switcher in Header */}
+      <div className={styles.languageBar}>
+        <LanguageSwitcher />
+      </div>
+
       {/* Hero Section - Arcade Screen */}
       <section className={styles.hero}>
         <div className={styles.heroContent}>
-          <h1 className={styles.heroTitle}>AGENT ARENA</h1>
+          <h1 className={styles.heroTitle}>{t('home.heroTitle')}</h1>
           <p className={styles.heroTagline}>
-            INSERT COIN TO START
+            {t('home.heroTagline')}
           </p>
           <p className={styles.heroSubtitle}>
-            The ultimate competitive platform where AI agents battle in poker tournaments.
-            Watch live games, place bets, and earn rewards.
+            {t('home.heroSubtitle')}
           </p>
 
           <div className={styles.ctaGroup}>
             <Link href="/register">
-              <Badge variant="success" size="md">START GAME</Badge>
+              <Badge variant="success" size="md">{t('home.startGame')}</Badge>
             </Link>
             <Link href="/docs">
-              <Badge variant="default" size="md">HOW TO PLAY</Badge>
+              <Badge variant="default" size="md">{t('home.howToPlay')}</Badge>
             </Link>
           </div>
 
           <div className={styles.quickLinks}>
             <Link href="/leaderboard" className={styles.quickLink}>
-              HIGH SCORES
+              {t('home.highScores')}
             </Link>
             <Link href="/docs" className={styles.quickLink}>
-              MANUAL
+              {t('home.manual')}
             </Link>
           </div>
         </div>
@@ -102,7 +122,7 @@ export default async function LandingPage() {
 
       {/* Features Section - Character Select */}
       <section className={styles.features}>
-        <h2 className={styles.sectionTitle}>SELECT YOUR CHARACTER</h2>
+        <h2 className={styles.sectionTitle}>{t('home.features.title')}</h2>
 
         <div className={styles.featureGrid}>
           {features.map((feature, idx) => (
@@ -116,33 +136,33 @@ export default async function LandingPage() {
 
       {/* How It Works - Level Progression */}
       <section className={styles.howItWorks}>
-        <h2 className={styles.sectionTitle}>HOW TO PLAY</h2>
+        <h2 className={styles.sectionTitle}>{t('home.howItWorks.title')}</h2>
 
         <div className={styles.stepsGrid}>
           <div className={styles.step}>
             <div className={styles.stepNumber}>1</div>
-            <h3>SIGN UP</h3>
-            <p>Create account. Get 1000 free tokens.</p>
+            <h3>{t('home.howItWorks.step1.title')}</h3>
+            <p>{t('home.howItWorks.step1.description')}</p>
           </div>
           <div className={styles.step}>
             <div className={styles.stepNumber}>2</div>
-            <h3>CREATE AGENT</h3>
-            <p>Name your agent. Get WebSocket endpoint.</p>
+            <h3>{t('home.howItWorks.step2.title')}</h3>
+            <p>{t('home.howItWorks.step2.description')}</p>
           </div>
           <div className={styles.step}>
             <div className={styles.stepNumber}>3</div>
-            <h3>CONNECT</h3>
-            <p>Your agent receives game events via WS.</p>
+            <h3>{t('home.howItWorks.step3.title')}</h3>
+            <p>{t('home.howItWorks.step3.description')}</p>
           </div>
           <div className={styles.step}>
             <div className={styles.stepNumber}>4</div>
-            <h3>WIN</h3>
-            <p>Earn tokens. Climb leaderboard.</p>
+            <h3>{t('home.howItWorks.step4.title')}</h3>
+            <p>{t('home.howItWorks.step4.description')}</p>
           </div>
         </div>
 
         <div className={styles.codePreview}>
-          <h3>CODE EXAMPLE</h3>
+          <h3>{t('home.howItWorks.codeExample')}</h3>
           <pre className={styles.codeSnippet}>
 {`// Connect to your agent's WebSocket
 const ws = new WebSocket('ws://arena.com/ws/agent/YOUR_ID');
@@ -162,16 +182,16 @@ ws.onmessage = (msg) => {
 
       {/* CTA Section */}
       <section className={styles.cta}>
-        <h2 className={styles.ctaTitle}>READY?</h2>
+        <h2 className={styles.ctaTitle}>{t('home.cta.title')}</h2>
         <p className={styles.ctaSubtitle}>
-          Join Agent Arena. Let your AI agents compete while you watch, bet, and earn.
+          {t('home.cta.subtitle')}
         </p>
         <div className={styles.ctaButtons}>
           <Link href="/register">
-            <Badge variant="success" size="md">INSERT COIN</Badge>
+            <Badge variant="success" size="md">{t('home.cta.insertCoin')}</Badge>
           </Link>
           <Link href="/login">
-            <Badge variant="default" size="md">CONTINUE</Badge>
+            <Badge variant="default" size="md">{t('home.cta.continue')}</Badge>
           </Link>
         </div>
       </section>
@@ -180,13 +200,13 @@ ws.onmessage = (msg) => {
       <footer className={styles.footer}>
         <div className={styles.footerContent}>
           <div className={styles.footerBrand}>
-            AGENT ARENA
+            {t('home.footer.brand')}
           </div>
           <div className={styles.footerLinks}>
-            <Link href="/docs">DOCS</Link>
-            <Link href="/leaderboard">SCORES</Link>
-            <Link href="/login">LOGIN</Link>
-            <Link href="/register">START</Link>
+            <Link href="/docs">{t('home.footer.docs')}</Link>
+            <Link href="/leaderboard">{t('home.footer.scores')}</Link>
+            <Link href="/login">{t('home.footer.login')}</Link>
+            <Link href="/register">{t('home.footer.start')}</Link>
           </div>
         </div>
       </footer>

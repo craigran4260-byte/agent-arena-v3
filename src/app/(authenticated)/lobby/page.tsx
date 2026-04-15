@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Header } from '@/components/layout';
 import { Card, Button, DataTable, Input, useToast, Skeleton } from '@/components/ui';
 import { CreateTableDialog, JoinTableDialog } from '@/components/lobby';
+import { useTranslation } from '@/contexts/LanguageContext';
 import styles from './page.module.css';
 
 interface Table {
@@ -17,6 +18,7 @@ interface Table {
 
 export default function LobbyPage() {
   const { addToast } = useToast();
+  const { t } = useTranslation();
   const [tables, setTables] = useState<Table[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -38,7 +40,7 @@ export default function LobbyPage() {
       const data = await res.json();
       setTables(data);
     } catch (error: any) {
-      addToast('Failed to load tables', 'error');
+      addToast(t('common.error'), 'error');
     } finally {
       setLoading(false);
     }
@@ -56,27 +58,27 @@ export default function LobbyPage() {
   const tableColumns = [
     {
       key: 'name',
-      label: 'Table Name',
+      label: t('lobby.table.name'),
       render: (value: string) => <span className={styles.tableName}>{value}</span>,
     },
     {
       key: 'buyIn',
-      label: 'Buy-in',
+      label: t('lobby.table.stakes'),
       render: (value: number) => `${value.toLocaleString()} chips`,
     },
     {
       key: 'currentPlayers',
-      label: 'Players',
+      label: t('lobby.table.players'),
       render: (value: number, row: Table) => `${value}/${row.maxPlayers}`,
     },
     {
       key: 'createdAt',
-      label: 'Created',
+      label: t('agents.table.created'),
       render: (value: string) => new Date(value).toLocaleTimeString(),
     },
     {
       key: 'id',
-      label: 'Action',
+      label: t('lobby.table.actions'),
       render: (value: number, row: Table) => (
         <Button
           variant="primary"
@@ -84,7 +86,7 @@ export default function LobbyPage() {
           onClick={() => handleJoinClick(value)}
           disabled={row.currentPlayers >= row.maxPlayers}
         >
-          {row.currentPlayers >= row.maxPlayers ? 'Full' : 'Join'}
+          {row.currentPlayers >= row.maxPlayers ? t('lobby.status.full') : t('common.edit')}
         </Button>
       ),
     },
@@ -93,7 +95,7 @@ export default function LobbyPage() {
   if (loading) {
     return (
       <>
-        <Header title="Lobby" showBackButton />
+        <Header title={t('lobby.title')} showBackButton />
         <div className={styles.container}>
           <Skeleton width="100%" height="120px" variant="rect" />
           <Skeleton width="100%" height="400px" variant="rect" />
@@ -104,13 +106,13 @@ export default function LobbyPage() {
 
   return (
     <>
-      <Header title="Poker Lobby" showBackButton />
+      <Header title={t('lobby.title')} showBackButton />
 
       <div className={styles.container}>
         {/* Controls */}
         <div className={styles.controlsSection}>
           <Input
-            placeholder="Search tables..."
+            placeholder={t('leaderboard.searchPlaceholder')}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             icon="search"
@@ -119,7 +121,7 @@ export default function LobbyPage() {
             variant="primary"
             onClick={() => setShowCreateDialog(true)}
           >
-            Create Table
+            {t('lobby.createTable')}
           </Button>
         </div>
 
@@ -149,15 +151,15 @@ export default function LobbyPage() {
             <div className={styles.emptyState}>
               <p>
                 {searchTerm
-                  ? 'No tables match your search'
-                  : 'No active tables. Create one to get started!'}
+                  ? t('common.noData')
+                  : t('lobby.noTables')}
               </p>
               {!searchTerm && (
                 <Button
                   variant="primary"
                   onClick={() => setShowCreateDialog(true)}
                 >
-                  Create First Table
+                  {t('lobby.createTable')}
                 </Button>
               )}
             </div>

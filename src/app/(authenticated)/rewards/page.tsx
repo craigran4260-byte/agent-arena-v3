@@ -8,9 +8,11 @@ import { Tabs } from '@/components/ui/Tabs';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { TrophyIcon } from '@/components/icons/TrophyIcon';
 import { ChipIcon } from '@/components/icons/ChipIcon';
+import { useTranslation } from '@/contexts/LanguageContext';
 import styles from './page.module.css';
 
 export default function RewardsPage() {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<'unclaimed' | 'history'>('unclaimed');
   const [unclaimedRewards, setUnclaimedRewards] = useState<Reward[]>([]);
   const [claimedRewards, setClaimedRewards] = useState<Reward[]>([]);
@@ -92,9 +94,9 @@ export default function RewardsPage() {
         <BackButton />
         <div className={styles.titleSection}>
           <TrophyIcon size={32} className={styles.titleIcon} />
-          <h1>Rewards</h1>
+          <h1>{t('rewards.title')}</h1>
         </div>
-        <p className={styles.subtitle}>Claim your earned rewards and bonuses</p>
+        <p className={styles.subtitle}>{t('rewards.subtitle')}</p>
       </div>
 
       {/* Stats Cards */}
@@ -106,14 +108,14 @@ export default function RewardsPage() {
       ) : (
         <div className={styles.statsGrid}>
           <div className={styles.statCard}>
-            <div className={styles.statLabel}>Unclaimed Rewards</div>
+            <div className={styles.statLabel}>{t('rewards.available')}</div>
             <div className={styles.statValue}>{unclaimedStats.count}</div>
-            <div className={styles.statSubtitle}>Awaiting claim</div>
+            <div className={styles.statSubtitle}>{t('rewards.status.pending')}</div>
           </div>
 
           <div className={styles.statCard}>
             <ChipIcon size={24} className={styles.statIcon} />
-            <div className={styles.statLabel}>Total Available</div>
+            <div className={styles.statLabel}>{t('rewards.balance')}</div>
             <div className={styles.statValue}>+{unclaimedStats.total.toLocaleString()}</div>
             <div className={styles.statSubtitle}>Tokens</div>
           </div>
@@ -129,7 +131,7 @@ export default function RewardsPage() {
             onClick={handleClaimAll}
             loading={claimingId === -1}
           >
-            Claim All Rewards ({unclaimedStats.count})
+            {t('rewards.claim')} ({unclaimedStats.count})
           </Button>
         </div>
       )}
@@ -140,12 +142,12 @@ export default function RewardsPage() {
           tabs={[
             {
               id: 'unclaimed',
-              label: `Unclaimed (${unclaimedRewards.length})`,
+              label: `${t('rewards.status.pending')} (${unclaimedRewards.length})`,
               content: null
             },
             {
               id: 'history',
-              label: `History (${claimedRewards.length})`,
+              label: `${t('rewards.history.title')} (${claimedRewards.length})`,
               content: null
             }
           ]}
@@ -178,7 +180,7 @@ export default function RewardsPage() {
             ) : (
               <div className={styles.emptyState}>
                 <TrophyIcon size={48} className={styles.emptyIcon} />
-                <h3>No Unclaimed Rewards</h3>
+                <h3>{t('common.noData')}</h3>
                 <p>Complete matches and achievements to earn rewards</p>
               </div>
             )}
@@ -197,7 +199,7 @@ export default function RewardsPage() {
             ) : (
               <div className={styles.emptyState}>
                 <TrophyIcon size={48} className={styles.emptyIcon} />
-                <h3>No Reward History</h3>
+                <h3>{t('common.noData')}</h3>
                 <p>Claimed rewards will appear here</p>
               </div>
             )}
